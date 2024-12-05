@@ -2,7 +2,7 @@ interface RegisterForm {
   name: string,
   email: string,
   password: string,
-  phoneNumber: string,
+  phone_number: string,
 }
 
 type FilterFunction = (val : string) => boolean

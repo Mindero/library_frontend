@@ -4,6 +4,7 @@ import {store} from './store';
 import {Route, Routes, Router, BrowserRouter } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage'
 import RegisterPage from './components/RegisterPage/RegsiterPage'
+import LoginPage from './components/LoginPage/LoginPage';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage/>}/> 
-            {/* <Route path="/login" element={<LoginPage/>}/> */}
+            <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
           </Routes>
       </div>

@@ -1,17 +1,22 @@
 import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
-import RegisterForm, {filterForm} from './RegisterForm'
-import {postRegisterForm} from './RegisterService'
+import LoginForm from './LoginForm';
+import { useDispatch } from 'react-redux';
+import { setIsAuth, setJwt } from '../../reducer/userStore';
+import { userJwtSelector } from '../../reducer/userStore/reducer';
+import { useSelector } from 'react-redux';
+import { postLoginForm } from './LoginService';
 
-export default function RegisterPage() {
-  const [form, setForm] = useState<RegisterForm>({
-    name: '',
+
+export default function LoginPage() {
+  const [form, setForm] = useState<LoginForm>({
     email: '',
     password: '',
-    phone_number: '',
   });
 
   const [incorrectField, setIncorrectField] = useState<string>();
+
+  const dispatch = useDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,18 +27,23 @@ export default function RegisterPage() {
     }));
   };
 
-  const submitRegister = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const submitLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const wrongField : string | null = filterForm(form, (val : string) => val.length == 0);
+    const wrongField : string | null =
+      (form.email.length === 0) ? form.email
+      : (form.password.length === 0) ? form.password
+      : null;
     console.log(form, wrongField);
     if (wrongField !== null){
       setIncorrectField(`Неправильно введено поле ${wrongField}`);
     }
     else{
       try{
-        const data = await postRegisterForm(form);
-        console.log("Success register");
-        setIncorrectField("Регистрация успешна");
+        const data = await postLoginForm(form);
+        dispatch(setJwt(data.access_token));
+        dispatch(setIsAuth(true));
+        console.log("Success login");
+        setIncorrectField("Логин успешен");
       } catch(error){
         console.log(error);
       }
@@ -44,32 +54,12 @@ export default function RegisterPage() {
     <div>
       <h2>RegisterPage</h2>
       <div className='inputForm'>
-          <p>Name</p>
-          <input
-            className='name'
-            name='name'
-            type="text"
-            value={form['name']}
-            onChange={onChange}
-          />
-      </div>
-      <div className='inputForm'>
           <p>email</p>
           <input
             className='email'
             name='email'
             type="text"
             value={form['email']}
-            onChange={onChange}
-          />
-      </div>
-      <div className='inputForm'>
-          <p>Phone number</p>
-          <input
-            className='phone_number'
-            name='phone_number'
-            type="text"
-            value={form['phone_number']}
             onChange={onChange}
           />
       </div>
@@ -83,8 +73,8 @@ export default function RegisterPage() {
             onChange={onChange}
           />
       </div>
-      <button type="submit" onClick={submitRegister}>
-          Register
+      <button type="submit" onClick={submitLogin}>
+          Login
       </button>
       {(incorrectField === undefined)? 
       <></>:
