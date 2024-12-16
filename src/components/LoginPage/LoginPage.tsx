@@ -3,18 +3,16 @@ import { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useDispatch } from 'react-redux';
 import { setIsAuth, setJwt } from '../../reducer/userStore';
-import { userJwtSelector } from '../../reducer/userStore/reducer';
-import { useSelector } from 'react-redux';
 import { postLoginForm } from './LoginService';
 
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginForm>({
-    email: '',
+    username: '',
     password: '',
   });
 
-  const [incorrectField, setIncorrectField] = useState<string>();
+  const [loginInfo, setloginInfo] = useState<string>();
 
   const dispatch = useDispatch();
 
@@ -30,12 +28,12 @@ export default function LoginPage() {
   const submitLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const wrongField : string | null =
-      (form.email.length === 0) ? form.email
+      (form.username.length === 0) ? form.username
       : (form.password.length === 0) ? form.password
       : null;
     console.log(form, wrongField);
     if (wrongField !== null){
-      setIncorrectField(`Неправильно введено поле ${wrongField}`);
+      setloginInfo(`Неправильно введено поле ${wrongField}`);
     }
     else{
       try{
@@ -43,7 +41,7 @@ export default function LoginPage() {
         dispatch(setJwt(data.access_token));
         dispatch(setIsAuth(true));
         console.log("Success login");
-        setIncorrectField("Логин успешен");
+        setloginInfo("Логин успешен");
       } catch(error){
         console.log(error);
       }
@@ -52,14 +50,14 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h2>RegisterPage</h2>
+      <h2>LoginPage</h2>
       <div className='inputForm'>
           <p>email</p>
           <input
-            className='email'
-            name='email'
+            className='username'
+            name='username'
             type="text"
-            value={form['email']}
+            value={form['username']}
             onChange={onChange}
           />
       </div>
@@ -76,10 +74,10 @@ export default function LoginPage() {
       <button type="submit" onClick={submitLogin}>
           Login
       </button>
-      {(incorrectField === undefined)? 
+      {(loginInfo === undefined)? 
       <></>:
       <div>
-        {incorrectField}
+        {loginInfo}
       </div>
       }
     </div>

@@ -1,11 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 export const AuthContainer = () =>{
+  const navigate = useNavigate()
+
+  const navHandler = (path: string) => {
+    navigate(path)
+  }
+
   return (
     <div>
-      <Link to="/login"> Login </Link>
-      <Link to="/register"> Register </Link>
+      <button onClick={() => navHandler("/login")}> Login </button>
+      <button onClick={() => navHandler("/register")}> Register </button>
     </div>
   );
 }
