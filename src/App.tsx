@@ -7,6 +7,7 @@ import RegisterPage from './components/RegisterPage/RegsiterPage'
 import LoginPage from './components/LoginPage/LoginPage';
 import { ProfilePage } from './components/ProfilePage/ProfilePage';
 import { userAuthSelector, userJwtSelector } from './reducer/userStore/reducer';
+import { SearchPage } from './components/SearchPage/SearchPage';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute expression={useSelector(userAuthSelector)}><ProfilePage/></ProtectedRoute>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
+            <Route path="/search/:name" element={<SearchPage/>}/>
             <Route path="*" element={<div>Not Found</div>}/>
           </Routes>
       </div>

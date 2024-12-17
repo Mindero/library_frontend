@@ -10,6 +10,7 @@ export const LogoutInfo = () => {
     dispatch(setJwt(""));
     dispatch(setIsAuth(false));
   }
+  
   return (
     <div>
       <button type = "button" onClick={logoutHandler}> Logout </button>

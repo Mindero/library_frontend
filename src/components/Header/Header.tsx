@@ -4,6 +4,7 @@ import {ProfileInfo} from './ProfileInfo'
 import { AuthWrapper } from './AuthWrapper';
 import { useNavigate } from 'react-router-dom';
 import { LogoutInfo } from './LogoutInfo';
+import { SearchBar } from '../HomePage/SearchBar';
 
 function Header(): JSX.Element {
   const homeNavigate = useNavigate();
@@ -19,6 +20,7 @@ function Header(): JSX.Element {
         <ProfileInfo />
         <LogoutInfo />
       </AuthWrapper>
+      <SearchBar/>
     </div>
   );
 }
