@@ -3,6 +3,7 @@ import React from 'react';
 import {ProfileInfo} from './ProfileInfo'
 import { AuthWrapper } from './AuthWrapper';
 import { useNavigate } from 'react-router-dom';
+import { LogoutInfo } from './LogoutInfo';
 
 function Header(): JSX.Element {
   const homeNavigate = useNavigate();
@@ -16,6 +17,7 @@ function Header(): JSX.Element {
       <p> header </p>
       <AuthWrapper>
         <ProfileInfo />
+        <LogoutInfo />
       </AuthWrapper>
     </div>
   );
