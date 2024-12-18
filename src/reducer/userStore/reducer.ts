@@ -11,9 +11,13 @@ export const slice = createSlice({
     },
     setJwt : (state, action: PayloadAction<string>) => {
       state.jwt = action.payload;
+    },
+    setRole : (state, action: PayloadAction<string>) => {
+      state.role = action.payload;
     }
   }
 });
 
 export const userAuthSelector = (state: AppState) => state.userStore.isAuth;
 export const userJwtSelector = (state: AppState) => state.userStore.jwt;
+export const userRoleSelector = (state: AppState) => state.userStore.role;

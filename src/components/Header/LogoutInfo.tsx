@@ -1,5 +1,5 @@
 import React from 'react';
-import { setIsAuth, setJwt } from '../../reducer/userStore';
+import { setIsAuth, setJwt, setRole } from '../../reducer/userStore';
 import { useDispatch } from 'react-redux';
 
 export const LogoutInfo = () => {
@@ -9,6 +9,7 @@ export const LogoutInfo = () => {
   const logoutHandler = () => {
     dispatch(setJwt(""));
     dispatch(setIsAuth(false));
+    dispatch(setRole(""));
   }
   
   return (

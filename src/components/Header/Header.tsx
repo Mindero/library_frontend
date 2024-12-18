@@ -15,7 +15,6 @@ function Header(): JSX.Element {
     <div className="Header">
       <button type='button' onClick={homeClickNavigate}>Home</button>
 
-      <p> header </p>
       <AuthWrapper>
         <ProfileInfo />
         <LogoutInfo />

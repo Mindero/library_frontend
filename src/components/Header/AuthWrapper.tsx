@@ -11,7 +11,7 @@ interface AuthWrapperPros {
 export const AuthWrapper: React.FC<AuthWrapperPros> = ({children}) => {
   const isAuth = useSelector(userAuthSelector);
   const jwt = useSelector(userJwtSelector);
-  console.log(`isAuth = ${isAuth}`);
+  // console.log(`isAuth = ${isAuth}`);
   //console.log(`JWT = ${jwt}`);
   return (
     <div>

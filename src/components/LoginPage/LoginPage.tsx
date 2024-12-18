@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useDispatch } from 'react-redux';
-import { setIsAuth, setJwt } from '../../reducer/userStore';
+import { setIsAuth, setJwt, setRole } from '../../reducer/userStore';
 import { postLoginForm } from './LoginService';
 
 
@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [form, setForm] = useState<LoginForm>({
     username: '',
     password: '',
+    role: '',
   });
 
   const [loginInfo, setloginInfo] = useState<string>();
@@ -40,6 +41,7 @@ export default function LoginPage() {
         const data = await postLoginForm(form);
         dispatch(setJwt(data.access_token));
         dispatch(setIsAuth(true));
+        dispatch(setRole(data.role))
         console.log("Success login");
         setloginInfo("Логин успешен");
       } catch(error){

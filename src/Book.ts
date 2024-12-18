@@ -11,14 +11,14 @@ export interface Book {
 
 
 export const getAllBooks = async () => {
-  console.log("URL " + VIEW_BOOKS_GET_ALL_URL);
+  // console.log("URL " + VIEW_BOOKS_GET_ALL_URL);
   const res = await axios.get(VIEW_BOOKS_GET_ALL_URL);
   const data = res.data;
   return data;
 }
 
 export const getBooksByName = async (name : string) => {
-  console.log("URL " + VIEW_BOOKS_GET_BY_NAME);
+  // console.log("URL " + VIEW_BOOKS_GET_BY_NAME);
   try{
     const res = await axios.get(VIEW_BOOKS_GET_BY_NAME + name);
     const data = res.data;

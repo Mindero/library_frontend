@@ -14,7 +14,7 @@ export interface ProfileBook{
 }
 
 export const getProfileInfo = async (jwt : string | null) => {
-  console.log("URL " + READER_GET_URL);
+  // console.log("URL " + READER_GET_URL);
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
