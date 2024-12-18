@@ -3,25 +3,22 @@ import { getProfileInfo } from './ProfileService';
 import { useSelector } from 'react-redux';
 import { userJwtSelector } from '../../reducer/userStore/reducer';
 import ProfileForm from './ProfileForm';
+import { ProfileInfo } from './ProfileInfo';
+import { Navigate } from 'react-router-dom';
+import { ProfileBooks } from './ProfileBooks';
 
 export const ProfilePage = () => {
 
   const [profile, setProfile] = useState<ProfileForm | null>(null);
-  const jwt: string | null= useSelector(userJwtSelector);
-
-  useEffect(() => {
-    getProfileInfo(jwt).then(profile => {
-      setProfile(profile);
-    })
-  }, []);
-
+  const NullableJwt: string | null= useSelector(userJwtSelector);
+  if (NullableJwt === null){
+    <Navigate to ="/"/>
+  }
+  const jwt = String(NullableJwt);
   return (
     <div>
-      Profile info
-      <p>Name: {profile?.name} </p>
-      <p>Email: {profile?.email} </p>
-      <p>Phone number: {profile?.phone_number} </p>
-      <p>Created date: {profile?.created_date.toLocaleString()} </p>
+      <ProfileInfo jwt = {jwt}/>
+      <ProfileBooks jwt = {jwt}/>
     </div>
   )
 }

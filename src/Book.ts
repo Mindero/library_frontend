@@ -29,7 +29,7 @@ export const getBooksByName = async (name : string) => {
   }
 }
 
-export const getBookFormById = async (id : string | undefined) => {
+export const getBookFormById = async (id : number) => {
   try{
     const res = await axios.get(GET_BOOK_BY_NAME_URL + id,);
     const data = res.data;

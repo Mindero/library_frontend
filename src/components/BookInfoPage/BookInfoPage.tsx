@@ -2,12 +2,12 @@ import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { AllAuthors } from "../../AllAuthors";
 import { Book, getBookFormById } from "../../Book";
+import { BookInstance } from "./BookInstance";
 
 export const BookInfoPage = () => {
   const {id_book} = useParams();
-  console.log("BookInfoPage " + id_book);
   if (id_book === undefined) <Navigate to = "/"/>
-
+  const id : number = Number(id_book);
   const [bookForm, setBookForm] = useState<Book>({
     "id_book": Number(id_book),
     "book_name": "Loading",
@@ -16,8 +16,8 @@ export const BookInfoPage = () => {
 
 
   useEffect(() => {
-    console.log(id_book);
-    getBookFormById(id_book).then(data => {
+    console.log(id);
+    getBookFormById(id).then(data => {
       setBookForm(data);
       console.log(data);
     });
@@ -27,6 +27,7 @@ export const BookInfoPage = () => {
     <div>
       <h1>{bookForm.book_name}</h1>
       <AllAuthors authors={bookForm.authors} />
+      <BookInstance id_book={id}/>
     </div>
   )
 }

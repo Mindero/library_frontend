@@ -14,3 +14,9 @@ export const GET_BOOK_BY_NAME_URL = PREFIX + "/books/book_info/";
 
 const AUTHOR_PREFIX = PREFIX + "/authors"
 export const AUTHOR_GET_BY_ID_URL = AUTHOR_PREFIX + "/";
+
+const INSTANCE_PREFIX = PREFIX + "/book_instance";
+export const INSTANCE_GET = INSTANCE_PREFIX + "/get_free_instances/";
+
+export const BOOK_READER_GET = PREFIX + "/book_reader/profile_books/";
+export const BOOK_READER_ADD = PREFIX + "/book_reader/add_bookReader";

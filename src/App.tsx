@@ -5,11 +5,12 @@ import {Route, Routes, Router, BrowserRouter, Link, Navigate } from 'react-route
 import HomePage from './components/HomePage/HomePage'
 import RegisterPage from './components/RegisterPage/RegsiterPage'
 import LoginPage from './components/LoginPage/LoginPage';
-import { ProfilePage } from './components/ProfilePage/ProfilePage';
+
 import { userAuthSelector, userJwtSelector } from './reducer/userStore/reducer';
 import { SearchPage } from './components/SearchPage/SearchPage';
 import { BookInfoPage } from './components/BookInfoPage/BookInfoPage';
 import { AuthorInfoPage } from './components/AuthorInfoPage/AuthorInfoPage';
+import { ProfilePage } from './components/ProfilePage/ProfilePage';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -32,8 +33,8 @@ function App() {
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/search/:name" element={<SearchPage/>}/>
-            <Route path = "/book/:id_book" element={<BookInfoPage/>}/>
-            <Route path = "/author/:id_author" element={<AuthorInfoPage/>}/>
+            <Route path= "/book/:id_book" element={<BookInfoPage/>}/>
+            <Route path= "/author/:id_author" element={<AuthorInfoPage/>}/>
             <Route path="*" element={<div>Not Found</div>}/>
           </Routes>
       </div>
