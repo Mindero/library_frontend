@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import Book, { getAllBooks } from "../../Book";
-import { bookListToHtml } from "../../bookListToHtml";
+import { Book, getAllBooks } from "../../Book";
+import { BookListToHtml } from "../../bookListToHtml";
 
 export const AllBooks = () => {
   const [booksList, setBooksList] = useState<Array<Book>>([]);
@@ -14,7 +14,7 @@ export const AllBooks = () => {
   return (
     <div>
       <hr/>
-      {bookListToHtml(booksList)}
+      <BookListToHtml booksList = {booksList}/>
     </div>
   )
 }

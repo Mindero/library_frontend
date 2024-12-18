@@ -1,12 +1,12 @@
 import { Navigate, useParams } from "react-router-dom"
-import Book, { getBooksByName } from "../../Book";
+import {Book, getBooksByName } from "../../Book";
 import { useEffect, useState } from "react";
-import { bookListToHtml } from "../../bookListToHtml";
+import { BookListToHtml } from "../../bookListToHtml";
 
 export const SearchPage = () => {
   const {name} = useParams();
 
-  const [booksList, setBooksList] = useState<Array<Book>>([]);
+  const [booksList, setBooksList] = useState<Book[]>([]);
 
   useEffect(() => {
     (name === undefined) ? 
@@ -18,7 +18,7 @@ export const SearchPage = () => {
   
   return (
     <div>
-      {bookListToHtml(booksList)}
+      <BookListToHtml booksList={booksList}/>
     </div>
   )
 }

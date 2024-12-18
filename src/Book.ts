@@ -1,14 +1,14 @@
 import axios from "axios";
-import { VIEW_BOOKS_GET_ALL_URL, VIEW_BOOKS_GET_BY_NAME } from "./util/urls";
+import { GET_BOOK_BY_NAME_URL, VIEW_BOOKS_GET_ALL_URL, VIEW_BOOKS_GET_BY_NAME } from "./util/urls";
+import { Author } from "./Authors";
 
-interface Book {
-  id_author_book: number,
+export interface Book {
   book_name: string,
-  author_name: string,
-  id_author: number,
   id_book: number,
+  authors: Author[],
 }
-export default Book
+
+
 
 export const getAllBooks = async () => {
   console.log("URL " + VIEW_BOOKS_GET_ALL_URL);
@@ -26,5 +26,16 @@ export const getBooksByName = async (name : string) => {
   }
   catch (error){
     console.log("Error with view books get by name", error);
+  }
+}
+
+export const getBookFormById = async (id : string | undefined) => {
+  try{
+    const res = await axios.get(GET_BOOK_BY_NAME_URL + id,);
+    const data = res.data;
+    return data;
+  }
+  catch (error){
+    console.log("Can't get book by name " + error);
   }
 }
