@@ -5,6 +5,7 @@ import { userJwtSelector } from '../../reducer/userStore/reducer';
 import ProfileForm from './ProfileForm';
 import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';
 import { AppDispatch } from '../../store';
+import '../ui/ProfileInfo.css';
 
 export const ProfileInfo = ({jwt, dispatch} : {jwt : string, dispatch : AppDispatch}) => {
 
@@ -17,13 +18,21 @@ export const ProfileInfo = ({jwt, dispatch} : {jwt : string, dispatch : AppDispa
   }, []);
 
   return (
-    <div>
+    <div className="profile-info-container">
       <LoadingWrapper dispatch={dispatch}>
-        Profile info
-        <p>Name: {profile?.name} </p>
-        <p>Email: {profile?.email} </p>
-        <p>Phone number: {profile?.phone_number} </p>
-        <p>Created date: {profile?.created_date.toLocaleString()} </p>
+        <div className="profile-info">
+          <h2>Profile Info</h2>
+          {profile ? (
+            <div className="profile-details">
+              <p><span className="label">Name:</span> {profile.name}</p>
+              <p><span className="label">Email:</span> {profile.email}</p>
+              <p><span className="label">Phone number:</span> {profile.phone_number}</p>
+              <p><span className="label">Created date:</span> {profile.created_date.toLocaleString()}</p>
+            </div>
+          ) : (
+            <p className="no-profile">No profile information available.</p>
+          )}
+        </div>
       </LoadingWrapper>
     </div>
   )

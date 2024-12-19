@@ -47,8 +47,8 @@ function App() {
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/search/:name" element={<SearchPage/>}/>
-            <Route path= "/book/:id_book" element={<BookInfoPage/>}/>
-            <Route path= "/author/:id_author" element={<AuthorInfoPage/>}/>
+            <Route path="/book/:id_book" element={<BookInfoPage/>}/>
+            <Route path="/author/:id_author" element={<AuthorInfoPage/>}/>
             <Route path="/readers" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><ReadersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/authors" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><AuthorsTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/books" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BooksTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>

@@ -31,7 +31,14 @@ export const AuthorInfoPage = () => {
   return (
     <div>
       <LoadingWrapper dispatch={dispatch}>
-        <h1>{authorForm.author_name}</h1>
+        <h1 style={{
+          fontSize: '32px',
+          fontWeight: 'bold',
+          marginBottom: '20px',
+          color: '#333',
+          textAlign: 'left',
+          paddingLeft: "15px"
+        }}>{authorForm.author_name}</h1>
         <BookListToHtml booksList = {authorForm.books}/>
       </LoadingWrapper>
     </div>

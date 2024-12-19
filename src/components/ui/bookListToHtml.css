@@ -1,0 +1,36 @@
+.book-list-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.book-item p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.book-name {
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.separator {
+  margin-top: 10px;
+  border: 0;
+  border-top: 1px solid #ddd;
+}

@@ -1,0 +1,50 @@
+.profile-books-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.books-list {
+  margin-top: 20px;
+}
+
+.book-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.book-item p {
+  margin: 5px 0;
+}
+
+.book-name {
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+.penalty-info {
+  margin-top: 10px;
+  color: #d9534f;
+}
+
+.penalty-alert {
+  font-weight: bold;
+  color: #a94442;
+}
+
+.no-books {
+  text-align: center;
+  color: #777;
+  font-size: 16px;
+}

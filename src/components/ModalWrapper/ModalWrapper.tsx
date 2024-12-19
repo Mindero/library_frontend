@@ -17,15 +17,49 @@ export const ModalWrapper : React.FC<ModelWrapperPros> = ({dispatch}) => {
     dispatch(disableModal());
   }
   return (
-    (showModal)? (
-      <div className="modal">
-        <div className="modal-content">
-          <p>Error: {error}</p>
-          <button onClick={() => onClick()}>Close</button>
-        </div>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "20px",
+          borderRadius: "8px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          textAlign: "center",
+          width: "400px",
+        }}
+      >
+        <p style={{ marginBottom: "20px", color: "#d9534f", fontWeight: "bold" }}>
+          Error: {error}
+        </p>
+        <button
+          onClick={() => onClick()}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#007BFF",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#0056b3")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#007BFF")}
+        >
+          Close
+        </button>
       </div>
-    ) :(
-      <></>
-    )
+    </div>
   )
 }

@@ -45,57 +45,116 @@ export default function RegisterPage() {
 
   return (
     <LoadingWrapper dispatch={dispatch}>
-      <div>
-        <h2>RegisterPage</h2>
-        <div className='inputForm'>
-            <p>Name</p>
-            <input
-              className='name'
-              name='name'
-              type="text"
-              value={form['name']}
-              onChange={onChange}
-            />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        maxWidth: '400px',
+        margin: '0 auto'
+      }}>
+        <h2 style={{
+          fontSize: '24px',
+          marginBottom: '20px'
+        }}>
+          RegisterPage
+        </h2>
+        <div style={{
+          marginBottom: '10px',
+          width: '100%'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Name</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="name"
+            type="text"
+            value={form['name']}
+            onChange={onChange}
+          />
         </div>
-        <div className='inputForm'>
-            <p>email</p>
-            <input
-              className='email'
-              name='email'
-              type="text"
-              value={form['email']}
-              onChange={onChange}
-            />
+        <div style={{
+          marginBottom: '10px',
+          width: '100%'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Email</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="email"
+            type="text"
+            value={form['email']}
+            onChange={onChange}
+          />
         </div>
-        <div className='inputForm'>
-            <p>Phone number</p>
-            <input
-              className='phone_number'
-              name='phone_number'
-              type="text"
-              value={form['phone_number']}
-              onChange={onChange}
-            />
+        <div style={{
+          marginBottom: '10px',
+          width: '100%'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Phone number</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="phone_number"
+            type="text"
+            value={form['phone_number']}
+            onChange={onChange}
+          />
         </div>
-        <div className='inputForm'>
-            <p>password</p>
-            <input
-              className='password'
-              name='password'
-              type="text"
-              value={form['password']}
-              onChange={onChange}
-            />
+        <div style={{
+          marginBottom: '10px',
+          width: '100%'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Password</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="password"
+            type="text"
+            value={form['password']}
+            onChange={onChange}
+          />
         </div>
-        <button type="submit" onClick={submitRegister}>
-            Register
+        <button
+          type="submit"
+          onClick={submitRegister}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#0056b3')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#007BFF')}
+        >
+          Register
         </button>
-        {(incorrectField === undefined)? 
-        <></>:
-        <div>
-          {incorrectField}
-        </div>
-        }
+        {incorrectField && (
+          <div style={{
+            marginTop: '10px',
+            color: incorrectField.includes('Неправильно') ? 'red' : 'green'
+          }}>
+            {incorrectField}
+          </div>
+        )}
       </div>
     </LoadingWrapper>
   );

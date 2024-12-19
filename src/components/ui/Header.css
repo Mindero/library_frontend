@@ -1,0 +1,73 @@
+.header-container {
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.auth-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-left: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.auth-button {
+  padding: 10px 15px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.login-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.login-button:hover {
+  background-color: #218838;
+}
+
+.register-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}

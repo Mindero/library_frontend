@@ -52,38 +52,85 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px'
+    }}>
       <LoadingWrapper dispatch={dispatch}>
-        <h2>LoginPage</h2>
-        <div className='inputForm'>
-            <p>email</p>
-            <input
-              className='username'
-              name='username'
-              type="text"
-              value={form['username']}
-              onChange={onChange}
-            />
+        <h2 style={{
+          fontSize: '24px',
+          marginBottom: '20px'
+        }}>
+          LoginPage
+        </h2>
+        <div style={{
+          marginBottom: '10px',
+          width: '300px',
+          textAlign: 'left'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Email</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              marginTop: '5px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="username"
+            type="text"
+            value={form['username']}
+            onChange={onChange}
+          />
         </div>
-        <div className='inputForm'>
-            <p>password</p>
-            <input
-              className='password'
-              name='password'
-              type="text"
-              value={form['password']}
-              onChange={onChange}
-            />
+        <div style={{
+          marginBottom: '10px',
+          width: '300px',
+          textAlign: 'left'
+        }}>
+          <p style={{ marginBottom: '5px' }}>Password</p>
+          <input
+            style={{
+              width: '100%',
+              padding: '10px',
+              marginTop: '5px',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+            name="password"
+            type="password"
+            value={form['password']}
+            onChange={onChange}
+          />
         </div>
-        <button type="submit" onClick={submitLogin}>
-            Login
+        <button
+          type="submit"
+          onClick={submitLogin}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginTop: '10px'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
+        >
+          Login
         </button>
-        {(loginInfo === undefined)? 
-        <></>:
-        <div>
-          {loginInfo}
-        </div>
-        }
+        {loginInfo && (
+          <div style={{
+            marginTop: '10px',
+            color: loginInfo.includes('неправильно') ? 'red' : 'green'
+          }}>
+            {loginInfo}
+          </div>
+        )}
       </LoadingWrapper>
     </div>
   );

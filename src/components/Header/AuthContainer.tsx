@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, useNavigate} from 'react-router-dom'
+import '../ui/Header.css'
 
 export const AuthContainer = () =>{
   const navigate = useNavigate()
@@ -9,9 +10,9 @@ export const AuthContainer = () =>{
   }
 
   return (
-    <div>
-      <button onClick={() => navHandler("/login")}> Login </button>
-      <button onClick={() => navHandler("/register")}> Register </button>
+    <div className="auth-container">
+      <button className="auth-button login-button" onClick={() => navHandler("/login")}>Login</button>
+      <button className="auth-button register-button" onClick={() => navHandler("/register")}>Register</button>
     </div>
   );
 }

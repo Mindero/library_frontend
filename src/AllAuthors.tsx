@@ -14,12 +14,34 @@ export const AllAuthors = ({ authors } : AllAuthorsProps) : JSX.Element => {
   }
 
   return (
-    <span>
-      Авторы: {authors.map((author) => {
-        return <button onClick={() => onClick(author.id)}>
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      gap: '10px',
+      marginTop: '10px',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <span style={{ fontWeight: 'bold', color: '#333', marginRight: '5px' }}>Авторы:</span>
+      {authors.map((author) => (
+        <button
+          key={author.id}
+          onClick={() => onClick(author.id)}
+          style={{
+            backgroundColor: '#6c757d',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '5px 10px',
+            fontSize: '14px',
+            cursor: 'pointer'
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#5a6268')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#6c757d')}
+        >
           {author.name}
         </button>
-      })}
-    </span>
-  )
+      ))}
+    </div>
+  );
 }

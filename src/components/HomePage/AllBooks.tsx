@@ -18,7 +18,6 @@ export const AllBooks = () => {
   return (
     <div>
       <LoadingWrapper dispatch={dispatch}>
-        <hr/>
         <BookListToHtml booksList = {booksList}/>
       </LoadingWrapper>
     </div>

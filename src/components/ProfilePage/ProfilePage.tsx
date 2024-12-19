@@ -27,9 +27,10 @@ export const ProfilePage = () => {
       {(role === Role[Role.ADMIN]) ? (
         <AdminRights/>
       ): (
-        <></>
+        <div>
+          <ProfileBooks jwt = {jwt} dispatch={dispatch}/>
+        </div>
       )}
-      <ProfileBooks jwt = {jwt} dispatch={dispatch}/>
     </div>
   )
 }

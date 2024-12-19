@@ -3,11 +3,12 @@ const PREFIX = "http://127.0.0.1:8020/api";
 const READER_PREFIX = PREFIX + "/readers";
 export const READER_REGISTER_URL = READER_PREFIX + "/auth/register";
 export const READER_LOGIN_URL = READER_PREFIX + "/auth/login";
-export const READER_GET_URL = READER_PREFIX + "/{reader_id}";
+export const READER_GET_URL = READER_PREFIX + "/get_reader/{reader_id}";
 export const READER_GET_ALL_URL = READER_PREFIX + "/all_readers";
 export const READER_ADD = READER_PREFIX + "/add_reader";
 export const READER_UPDATE = READER_PREFIX + "/update_reader/";
 export const READER_DELETE = READER_PREFIX + "/delete_reader/";
+export const READER_GET_PENALTY = READER_PREFIX + "/get_penalty/{reader_id}";
 
 const VIEW_BOOK_PREFIX = PREFIX + "/view_book";
 export const VIEW_BOOKS_GET_ALL_URL = VIEW_BOOK_PREFIX + "/all_view_books";
