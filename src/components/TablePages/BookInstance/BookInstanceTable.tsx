@@ -97,17 +97,26 @@ export const BookInstanceTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedBookGenre ? update() : add();
           }}
         >
+          <label>
+            Supply date
+          </label>
           <input
             type="date"
             placeholder="Supply date"
             value={form.supply_date}
             onChange={(e) => setForm({ ...form, supply_date: e.target.value })}
           />
+          <label>
+            taken now
+          </label>
           <input
             type="checkbox"
             checked={form.taken_now}
             onChange={(e) => setForm({ ...form, taken_now: e.target.checked })}
           />
+          <label>
+            id book publisher
+          </label>
           <input
             type="number"
             placeholder="id book publisher"

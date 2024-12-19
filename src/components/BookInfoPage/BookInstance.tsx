@@ -52,7 +52,7 @@ export const BookInstance =  ({ id_book }: { id_book: number }) : JSX.Element =>
   const handleOrder = () => {
     console.log("Instance ordered:", selectedInstance);
     console.log("Pickup Date:", pickupDate);
-    console.log("Return Date:", r eturnDate);
+    console.log("Return Date:", returnDate);
     if (selectedInstance === null || pickupDate === "" || returnDate === "") closeModal();
     else{
       addInstanceToReader(selectedInstance.id_instance, new Date(pickupDate), new Date(returnDate), String(jwt), dispatch)

@@ -97,6 +97,9 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedGenre ? update() : add();
           }}
         >
+          <label>
+            name
+          </label>
           <input
             type="text"
             placeholder="Name"
@@ -119,8 +122,6 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Country</th>
-              <th>Birthday</th>
               <th>Actions</th>
             </tr>
           </thead>

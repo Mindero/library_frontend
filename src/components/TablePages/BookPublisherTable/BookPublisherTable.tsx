@@ -97,12 +97,18 @@ export const BookPublisherTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedBookGenre ? update() : add();
           }}
         >
+          <label>
+            id Book
+          </label>
           <input
             type="number"
             placeholder="id_book"
             value={form.id_book}
             onChange={(e) => setForm({ ...form, id_book: Number(e.target.value) })}
           />
+          <label>
+            id publisher
+          </label>
           <input
             type="number"
             placeholder="id publisher"

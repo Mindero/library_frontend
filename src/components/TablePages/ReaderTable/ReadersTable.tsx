@@ -95,18 +95,27 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedReader ? update() : add();
           }}
         >
+          <label>
+            name
+          </label>
           <input
             type="text"
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
+          <label>
+            email
+          </label>
           <input
             type="email"
             placeholder="Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
+          <label>
+            password
+          </label>
           <input
             type="text"
             placeholder="password"
@@ -114,12 +123,18 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
             onChange={(e) => setForm({ ...form, password: e.target.value })}
             disabled={selectedReader !== null}
           />
+          <label>
+            phone number
+          </label>
           <input
             type="text"
             placeholder="phone number"
             value={form.phone_number}
             onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
           />
+          <label>
+            role 
+          </label>
           <select
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}

@@ -97,18 +97,27 @@ export const AuthorsTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedAuthor ? update() : add();
           }}
         >
+          <label>
+            name
+          </label>
           <input
             type="text"
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
+          <label>
+            country
+          </label>
           <input
             type="text"
             placeholder="Country"
             value={form.country}
             onChange={(e) => setForm({ ...form, country: e.target.value })}
           />
+          <label>
+            Birthday
+          </label>
           <input
             type="Date"
             placeholder="Date"

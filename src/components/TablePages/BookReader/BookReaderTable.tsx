@@ -97,24 +97,36 @@ export const BookReaderTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedBookGenre ? update() : add();
           }}
         >
+          <label>
+            reader ticket
+          </label>
           <input
             type="number"
             placeholder="reader_ticket"
             value={form.reader_ticket}
             onChange={(e) => setForm({ ...form, reader_ticket: Number(e.target.value) })}
           />
+          <label>
+            id instance
+          </label>
           <input
             type="number"
             placeholder="id instance"
             value={form.id_instance}
             onChange={(e) => setForm({ ...form, id_instance: Number(e.target.value) })}
           />
+          <label>
+            borrow date
+          </label>
           <input
             type="Date"
             placeholder="borrow date"
             value={form.borrow_date}
             onChange={(e) => setForm({ ...form, borrow_date: e.target.value })}
           />
+          <label>
+            end date
+          </label>
           <input
             type="Date"
             placeholder="end date"

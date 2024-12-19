@@ -97,18 +97,27 @@ export const PenaltyTable = ({neededRole} :{neededRole: Role[]}) => {
             selectedBookGenre ? update() : add();
           }}
         >
+          <label>
+            id book reader
+          </label>
           <input
             type="number"
             placeholder="id book reader"
             value={form.id_book_reader}
             onChange={(e) => setForm({ ...form, id_book_reader: Number(e.target.value) })}
           />
+          <label>
+            start time
+          </label>
             <input
               type="Date"
               placeholder="start time"
               value={form.start_time}
               onChange={(e) => setForm({ ...form, start_time: e.target.value })}
             />
+          <label>
+            payment
+          </label>
           <input
             type="number"
             placeholder="payment"
