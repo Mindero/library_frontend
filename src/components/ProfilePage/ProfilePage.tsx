@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getProfileInfo } from './ProfileService';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userJwtSelector, userRoleSelector } from '../../reducer/userStore/reducer';
 import ProfileForm from './ProfileForm';
 import { ProfileInfo } from './ProfileInfo';
@@ -14,6 +14,7 @@ export const ProfilePage = () => {
   const [profile, setProfile] = useState<ProfileForm | null>(null);
   const NullableJwt: string | null = useSelector(userJwtSelector);
   const role: string | null = useSelector(userRoleSelector);
+  const dispatch = useDispatch();
   // console.log("Role: " + role);
   const navigate = useNavigate();
   if (NullableJwt === null){
@@ -22,13 +23,13 @@ export const ProfilePage = () => {
   const jwt = String(NullableJwt);
   return (
     <div>
-      <ProfileInfo jwt = {jwt}/>
+      <ProfileInfo jwt = {jwt} dispatch={dispatch}/>
       {(role === Role[Role.ADMIN]) ? (
         <AdminRights/>
       ): (
         <></>
       )}
-      <ProfileBooks jwt = {jwt}/>
+      <ProfileBooks jwt = {jwt} dispatch={dispatch}/>
     </div>
   )
 }

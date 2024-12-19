@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAdmin } from "../Checker";
 import { Role } from "../../../util/roles";
-import { addReader, deleteReader, fetchAllReaders, Reader, ReaderForm, updateReader } from "./ReaderService";
 import { read } from "fs";
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
+import { addAuthor, Author, AuthorForm, deleteAuthor, fetchAllAuthors, updateAuthor } from "./AuthorsService";
 
-export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
+export const AuthorsTable = ({neededRole} :{neededRole: Role[]}) => {
   const jwt : string | null = useSelector(userJwtSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,64 +35,66 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
         }
       });
   }, [jwt]);
-  const defaultForm : ReaderForm = { name: "", email: "", phone_number: "", password: "", role: "USER" };
-  const [readers, setReaders] = useState<Reader[]>([]);
-  const [form, setForm] = useState<ReaderForm>(defaultForm);
-  const [selectedReader, setSelectedReader] = useState<Reader | null>(null);
+
+  const defaultForm : AuthorForm = { name: "", country: "", birthday: ""};
+  const [authors, setAuthors] = useState<Author[]>([]);
+  const [form, setForm] = useState<AuthorForm>(defaultForm);
+  const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
   const [needToFetch, setToFetch] = useState<boolean>(true);
   
   useEffect(() => {
     if (!needToFetch) return;
-    fetchAllReaders(String(jwt), dispatch).then((data) => {
+    fetchAllAuthors(String(jwt), dispatch).then((data) => {
       if (data !== undefined){
-        setReaders(data);
+        console.log(data);
+        setAuthors(data);
         setToFetch(false);
       }
     });
   }, [needToFetch]);
 
-  const del = (reader_id : number) => {
-    deleteReader(String(jwt), reader_id, dispatch).then((data) => {
+  const del = (author_id : number) => {
+    deleteAuthor(String(jwt), author_id, dispatch).then((data) => {
       if (data !== undefined)
         setToFetch(true);
     });
   }
 
   useEffect(() => {
-    if (selectedReader === null){
+    if (selectedAuthor === null){
       setForm(defaultForm);
     }
     else{
-      setForm({...selectedReader, "password" : ""});
+      setForm({...selectedAuthor});
     }
-  }, [selectedReader]);
+  }, [selectedAuthor]);
 
   const update = () => {
-    if (selectedReader !== null){
-      updateReader(String(jwt), selectedReader.reader_ticket, form, dispatch).then(data => {
+    if (selectedAuthor !== null){
+      updateAuthor(String(jwt), selectedAuthor.id_author, form, dispatch).then(data => {
         if (data !== undefined){
           setToFetch(true);
-          setSelectedReader(null);
+          setSelectedAuthor(null);
         }
       });
     }
   }
 
   const add = () => {
-    addReader(String(jwt), form, dispatch).then(data => {
+    addAuthor(String(jwt), form, dispatch).then(data => {
       if (data !== undefined) 
         setToFetch(true);
     });
   }
 
   return <div>
-      <h1>Readers Management</h1>
+      <h1>Authors Management</h1>
 
       <div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            selectedReader ? update() : add();
+            selectedAuthor ? update() : add();
           }}
         >
           <input
@@ -102,78 +104,62 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
           <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            type="text"
+            placeholder="Country"
+            value={form.country}
+            onChange={(e) => setForm({ ...form, country: e.target.value })}
           />
           <input
-            type="text"
-            placeholder="password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            disabled={selectedReader !== null}
+            type="Date"
+            placeholder="Date"
+            value={form.birthday}
+            onChange={(e) => setForm({ ...form, birthday: e.target.value })}
           />
-          <input
-            type="text"
-            placeholder="phone number"
-            value={form.phone_number}
-            onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
-          />
-          <select
-            value={form.role}
-            onChange={(e) => setForm({ ...form, role: e.target.value })}
-          >
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
-          <button type="submit">{selectedReader ? "Update" : "Add"}</button>
+          <button type="submit">{selectedAuthor ? "Update" : "Add"}</button>
         </form>
       </div>
 
     {/* Таблица читателей */}
     <LoadingWrapper dispatch={dispatch}>
     <div>
-      <h2>All Readers</h2>
-      {readers.length === 0 ? (
-        <p>No readers found</p>
+      <h2>All authors</h2>
+      {authors.length === 0 ? (
+        <p>No authors found</p>
       ) : (
         <table>
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Phone number</th>
+              <th>Country</th>
+              <th>Birthday</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {readers.map((reader) => (
-              <tr key={reader.reader_ticket}>
-                <td>{reader.reader_ticket}</td>
-                <td>{reader.name}</td>
-                <td>{reader.email}</td>
-                <td>{reader.role}</td>
-                <td>{reader.phone_number}</td>
+            {authors.map((author) => (
+              <tr key={author.id_author}>
+                <td>{author.id_author}</td>
+                <td>{author.name}</td>
+                <td>{author.country}</td>
+                <td>{author.birthday}</td>
                 <td>
                 <button
                         style={{
                           backgroundColor:
-                            selectedReader?.reader_ticket === reader.reader_ticket
+                            selectedAuthor?.id_author === author.id_author
                               ? "lightblue"
                               : "white",
                         }}
                         onClick={() =>
-                          (selectedReader !== null && selectedReader.reader_ticket === reader.reader_ticket)
-                            ? setSelectedReader(null)
-                            : setSelectedReader(reader)
+                          (selectedAuthor !== null && selectedAuthor.id_author === author.id_author)
+                            ? setSelectedAuthor(null)
+                            : setSelectedAuthor(author)
                         }
                       >
                         Edit
                 </button>
-                  <button onClick={() => del(reader.reader_ticket)}>Delete</button>
+                  <button onClick={() => del(author.id_author)}>Delete</button>
                 </td>
               </tr>
             ))}

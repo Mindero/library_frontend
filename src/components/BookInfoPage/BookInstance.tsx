@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { addInstanceToReader, getAllFreeInstances, Instance } from "./Instance";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAuthSelector, userJwtSelector } from "../../reducer/userStore/reducer";
 import Modal from "react-modal";
 
@@ -16,13 +16,24 @@ export const BookInstance =  ({ id_book }: { id_book: number }) : JSX.Element =>
   const isAuth = useSelector(userAuthSelector);
   const jwt = useSelector(userJwtSelector);
 
+  const [doFetch, setDoFetch] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getAllFreeInstances(id_book).then(data => {
-      // console.log(data);
-      setInstances(data);
-    });
-  }, [id_book]);
+      setDoFetch(true);
+  }, []);
+
+  useEffect(() => {
+    // console.log(doFetch);
+    if (doFetch){
+      getAllFreeInstances(id_book, dispatch).then(data => {
+        if (data !== undefined)
+          setInstances(data);
+        setDoFetch(false);
+      });
+    }
+  }, [doFetch]);
+
 
   const openModal = (instance: Instance) => {
     console.log(`isAuth = ${isAuth}`)
@@ -42,32 +53,29 @@ export const BookInstance =  ({ id_book }: { id_book: number }) : JSX.Element =>
     console.log("Instance ordered:", selectedInstance);
     console.log("Pickup Date:", pickupDate);
     console.log("Return Date:", returnDate);
-    if (selectedInstance === null || pickupDate === null || returnDate === null) closeModal();
+    if (selectedInstance === null || pickupDate === "" || returnDate === "") closeModal();
     else{
-      addInstanceToReader(selectedInstance.id_instance, new Date(pickupDate), new Date(returnDate), String(jwt))
+      addInstanceToReader(selectedInstance.id_instance, new Date(pickupDate), new Date(returnDate), String(jwt), dispatch)
         .then(() => closeModal())
-        .catch((error) => {
-          console.log("Error with adding new instance to reader " + error);
-        });
     }
   };
 
   return (
     <div>
-      {(instances === undefined || instances?.length === 0 ) ? 
-        (<p> Доступных экземпляров нет </p>) :(
-         <>
-          <h2>Доступные экземпляры: </h2>
-           {instances?.map((instance, index) => {
-            return (<div key={instance.id_instance} data-index={instance.id_instance}>
-              <p> Издатель: {instance.publisher_name} </p>
-              <p> Дата привоза: {instance.supply_date.toLocaleString()} </p>
-              <button onClick={() => openModal(instance)}> Заказать </button>
-            </div>)
-           })}
-         </>
-        )
-      }
+        {(instances === undefined || instances?.length === 0 ) ? 
+          (<p> Доступных экземпляров нет </p>) :(
+          <>
+            <h2>Доступные экземпляры: </h2>
+            {instances?.map((instance, index) => {
+              return (<div key={instance.id_instance} data-index={instance.id_instance}>
+                <p> Издатель: {instance.publisher_name} </p>
+                <p> Дата привоза: {instance.supply_date.toLocaleString()} </p>
+                <button onClick={() => openModal(instance)}> Заказать </button>
+              </div>)
+            })}
+          </>
+          )
+        }
 
       {/* Модальное окно */}
       <Modal
@@ -83,33 +91,33 @@ export const BookInstance =  ({ id_book }: { id_book: number }) : JSX.Element =>
         },
       }}
     >
-      <h2>Выберите даты</h2>
-      <div>
-        <label>
-          Дата получения:
-          <input
-            type="date"
-            value={pickupDate}
-            onChange={(e) => setPickupDate(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Дата возврата:
-          <input
-            type="date"
-            value={returnDate}
-            onChange={(e) => setReturnDate(e.target.value)}
-          />
-        </label>
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={handleOrder}>Подтвердить</button>
-        <button onClick={closeModal} style={{ marginLeft: "10px" }}>
-          Отмена
-        </button>
-      </div>
+        <h2>Выберите даты</h2>
+        <div>
+          <label>
+            Дата получения:
+            <input
+              type="date"
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Дата возврата:
+            <input
+              type="date"
+              value={returnDate}
+              onChange={(e) => setReturnDate(e.target.value)}
+            />
+          </label>
+        </div>
+        <div style={{ marginTop: "20px" }}>
+          <button onClick={handleOrder}>Подтвердить</button>
+          <button onClick={closeModal} style={{ marginLeft: "10px" }}>
+            Отмена
+          </button>
+        </div>
     </Modal>
   </div>
 

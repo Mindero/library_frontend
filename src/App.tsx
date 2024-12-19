@@ -13,6 +13,16 @@ import { AuthorInfoPage } from './components/AuthorInfoPage/AuthorInfoPage';
 import { ProfilePage } from './components/ProfilePage/ProfilePage';
 import { Role } from './util/roles';
 import { ReadersTable } from './components/TablePages/ReaderTable/ReadersTable';
+import { AuthorsTable } from './components/TablePages/AuthorsTable/AuthorsTable';
+import { BooksTable } from './components/TablePages/BooksTable/BooksTable';
+import { PublishersTable } from './components/TablePages/PublisherTable/PublisherTable';
+import { GenresTable } from './components/TablePages/GenresTable/GenresTable';
+import { BookGenresTable } from './components/TablePages/BookGenresTable/BookGenresTable';
+import { BookInstanceTable } from './components/TablePages/BookInstance/BookInstanceTable';
+import { BookPublisherTable } from './components/TablePages/BookPublisherTable/BookPublisherTable';
+import { BookReaderTable } from './components/TablePages/BookReader/BookReaderTable';
+import { PenaltyTable } from './components/TablePages/PenaltyTable/PenaltyTable';
+import { AuthorsBookTable } from './components/TablePages/AuthorsBookView/AuthorsBookTable';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -40,6 +50,16 @@ function App() {
             <Route path= "/book/:id_book" element={<BookInfoPage/>}/>
             <Route path= "/author/:id_author" element={<AuthorInfoPage/>}/>
             <Route path="/readers" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><ReadersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/authors" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><AuthorsTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/books" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BooksTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/publishers" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PublishersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/genres" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><GenresTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/book_genres" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookGenresTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/book_instance" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookInstanceTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/book_publisher" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookPublisherTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/book_reader" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookReaderTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/penalty" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/authors_book" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><AuthorsBookTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="*" element={<div>Not Found</div>}/>
           </Routes>
       </div>

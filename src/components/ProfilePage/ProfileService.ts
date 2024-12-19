@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { userJwtSelector } from "../../reducer/userStore/reducer";
 import ProfileForm from "./ProfileForm";
 import { ProfileInfo } from "../Header/ProfileInfo";
+import { AppDispatch } from "../../store";
+import { setError, showModal, startLoading, stopLoading } from "../../reducer/settingsStore";
 
 export interface ProfileBook{
   book_name : string,
@@ -13,16 +15,25 @@ export interface ProfileBook{
   end_date: Date,
 }
 
-export const getProfileInfo = async (jwt : string | null) => {
+export const getProfileInfo = async (jwt : string | null, dispatch : AppDispatch) => {
   // console.log("URL " + READER_GET_URL);
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
     }
   };
-  const res = await axios.get(READER_GET_URL, config);
-  // console.log(res);
-  return toProfileForm(res.data);
+  try{
+    dispatch(startLoading());
+    const res = await axios.get(READER_GET_URL, config);
+    return toProfileForm(res.data);
+  }
+  catch(error){
+    dispatch(setError(`Error when get profile info ${error}`));
+    dispatch(showModal());
+  }
+  finally{
+    dispatch(stopLoading());
+  }
 }
 
 const toProfileForm = (data : any) : ProfileForm => {
@@ -35,12 +46,22 @@ const toProfileForm = (data : any) : ProfileForm => {
   return res;
 }
 
-export const getProfileBooks = async (jwt : string) => {
+export const getProfileBooks = async (jwt : string, dispatch : AppDispatch) => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
     }
   };
-  const res = await axios.get(`${BOOK_READER_GET}`, config);
-  return res.data
+  try{
+    dispatch(startLoading());
+    const res = await axios.get(`${BOOK_READER_GET}`, config);
+    return res.data;
+  }
+  catch (error){
+    dispatch(setError(`Error when get profile books ${error}`));
+    dispatch(showModal());
+  }
+  finally{
+    dispatch(stopLoading());
+  }
 }

@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAdmin } from "../Checker";
 import { Role } from "../../../util/roles";
-import { addReader, deleteReader, fetchAllReaders, Reader, ReaderForm, updateReader } from "./ReaderService";
 import { read } from "fs";
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
+import { Book, BookForm, deleteBook, fetchAllBooks, updateBook, addBook } from "./BooksService";
 
-export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
+export const BooksTable = ({neededRole} :{neededRole: Role[]}) => {
   const jwt : string | null = useSelector(userJwtSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,64 +35,66 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
         }
       });
   }, [jwt]);
-  const defaultForm : ReaderForm = { name: "", email: "", phone_number: "", password: "", role: "USER" };
-  const [readers, setReaders] = useState<Reader[]>([]);
-  const [form, setForm] = useState<ReaderForm>(defaultForm);
-  const [selectedReader, setSelectedReader] = useState<Reader | null>(null);
+
+  const defaultForm : BookForm = { name: "", year: 0};
+  const [books, setBooks] = useState<Book[]>([]);
+  const [form, setForm] = useState<BookForm>(defaultForm);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [needToFetch, setToFetch] = useState<boolean>(true);
   
   useEffect(() => {
     if (!needToFetch) return;
-    fetchAllReaders(String(jwt), dispatch).then((data) => {
+    fetchAllBooks(String(jwt), dispatch).then((data) => {
       if (data !== undefined){
-        setReaders(data);
+        console.log(data);
+        setBooks(data);
         setToFetch(false);
       }
     });
   }, [needToFetch]);
 
-  const del = (reader_id : number) => {
-    deleteReader(String(jwt), reader_id, dispatch).then((data) => {
+  const del = (book_id : number) => {
+    deleteBook(String(jwt), book_id, dispatch).then((data) => {
       if (data !== undefined)
         setToFetch(true);
     });
   }
 
   useEffect(() => {
-    if (selectedReader === null){
+    if (selectedBook === null){
       setForm(defaultForm);
     }
     else{
-      setForm({...selectedReader, "password" : ""});
+      setForm({...selectedBook});
     }
-  }, [selectedReader]);
+  }, [selectedBook]);
 
   const update = () => {
-    if (selectedReader !== null){
-      updateReader(String(jwt), selectedReader.reader_ticket, form, dispatch).then(data => {
+    if (selectedBook !== null){
+      updateBook(String(jwt), selectedBook.id_book, form, dispatch).then(data => {
         if (data !== undefined){
           setToFetch(true);
-          setSelectedReader(null);
+          setSelectedBook(null);
         }
       });
     }
   }
 
   const add = () => {
-    addReader(String(jwt), form, dispatch).then(data => {
+    addBook(String(jwt), form, dispatch).then(data => {
       if (data !== undefined) 
         setToFetch(true);
     });
   }
 
   return <div>
-      <h1>Readers Management</h1>
+      <h1>Books Management</h1>
 
       <div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            selectedReader ? update() : add();
+            selectedBook ? update() : add();
           }}
         >
           <input
@@ -102,78 +104,55 @@ export const ReadersTable = ({neededRole} :{neededRole: Role[]}) => {
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
           <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            type="number"
+            placeholder="Year"
+            value={form.year}
+            onChange={(e) => setForm({ ...form, year: Number(e.target.value) })}
           />
-          <input
-            type="text"
-            placeholder="password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            disabled={selectedReader !== null}
-          />
-          <input
-            type="text"
-            placeholder="phone number"
-            value={form.phone_number}
-            onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
-          />
-          <select
-            value={form.role}
-            onChange={(e) => setForm({ ...form, role: e.target.value })}
-          >
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
-          <button type="submit">{selectedReader ? "Update" : "Add"}</button>
+          <button type="submit">{selectedBook ? "Update" : "Add"}</button>
         </form>
       </div>
 
     {/* Таблица читателей */}
     <LoadingWrapper dispatch={dispatch}>
     <div>
-      <h2>All Readers</h2>
-      {readers.length === 0 ? (
-        <p>No readers found</p>
+      <h2>All books</h2>
+      {books.length === 0 ? (
+        <p>No books found</p>
       ) : (
         <table>
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Phone number</th>
+              <th>Country</th>
+              <th>Birthday</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {readers.map((reader) => (
-              <tr key={reader.reader_ticket}>
-                <td>{reader.reader_ticket}</td>
-                <td>{reader.name}</td>
-                <td>{reader.email}</td>
-                <td>{reader.role}</td>
-                <td>{reader.phone_number}</td>
+            {books.map((book) => (
+              <tr key={book.id_book}>
+                <td>{book.id_book}</td>
+                <td>{book.name}</td>
+                <td>{book.year}</td>
                 <td>
                 <button
                         style={{
                           backgroundColor:
-                            selectedReader?.reader_ticket === reader.reader_ticket
+                            selectedBook?.id_book === book.id_book
                               ? "lightblue"
                               : "white",
                         }}
                         onClick={() =>
-                          (selectedReader !== null && selectedReader.reader_ticket === reader.reader_ticket)
-                            ? setSelectedReader(null)
-                            : setSelectedReader(reader)
+                          (selectedBook !== null && selectedBook.id_book === book.id_book)
+                            ? setSelectedBook(null)
+                            : setSelectedBook(book)
                         }
                       >
                         Edit
                 </button>
-                  <button onClick={() => del(reader.reader_ticket)}>Delete</button>
+                  <button onClick={() => del(book.id_book)}>Delete</button>
                 </td>
               </tr>
             ))}

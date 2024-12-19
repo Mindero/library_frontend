@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import { useDispatch } from 'react-redux';
 import { setIsAuth, setJwt, setRole } from '../../reducer/userStore';
 import { postLoginForm } from './LoginService';
+import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';
 
 
 export default function LoginPage() {
@@ -38,7 +39,7 @@ export default function LoginPage() {
     }
     else{
       try{
-        const data = await postLoginForm(form);
+        const data = await postLoginForm(form, dispatch);
         dispatch(setJwt(data.access_token));
         dispatch(setIsAuth(true));
         dispatch(setRole(data.role))
@@ -52,36 +53,38 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h2>LoginPage</h2>
-      <div className='inputForm'>
-          <p>email</p>
-          <input
-            className='username'
-            name='username'
-            type="text"
-            value={form['username']}
-            onChange={onChange}
-          />
-      </div>
-      <div className='inputForm'>
-          <p>password</p>
-          <input
-            className='password'
-            name='password'
-            type="text"
-            value={form['password']}
-            onChange={onChange}
-          />
-      </div>
-      <button type="submit" onClick={submitLogin}>
-          Login
-      </button>
-      {(loginInfo === undefined)? 
-      <></>:
-      <div>
-        {loginInfo}
-      </div>
-      }
+      <LoadingWrapper dispatch={dispatch}>
+        <h2>LoginPage</h2>
+        <div className='inputForm'>
+            <p>email</p>
+            <input
+              className='username'
+              name='username'
+              type="text"
+              value={form['username']}
+              onChange={onChange}
+            />
+        </div>
+        <div className='inputForm'>
+            <p>password</p>
+            <input
+              className='password'
+              name='password'
+              type="text"
+              value={form['password']}
+              onChange={onChange}
+            />
+        </div>
+        <button type="submit" onClick={submitLogin}>
+            Login
+        </button>
+        {(loginInfo === undefined)? 
+        <></>:
+        <div>
+          {loginInfo}
+        </div>
+        }
+      </LoadingWrapper>
     </div>
   );
 }
