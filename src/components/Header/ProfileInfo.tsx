@@ -9,7 +9,7 @@ export const ProfileInfo = () => {
 
   return (
     <div>
-      <button className = "auth-button login-button" type = "button" onClick={toProfile}> My profile </button>
+      <button className = "auth-button login-button" type = "button" onClick={toProfile}> Профиль </button>
     </div>
   )
 }

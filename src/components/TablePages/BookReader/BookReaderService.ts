@@ -12,7 +12,7 @@ export interface BookReaderForm{
 
 export interface BookReader extends BookReaderForm {
   book_name: string,
-  publisher: string,
+  publisher_name: string,
   id_book_reader: number
 }
 

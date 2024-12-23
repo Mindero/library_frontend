@@ -36,7 +36,7 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
       });
   }, [jwt]);
 
-  const defaultForm : GenreForm = { name: ""};
+  const defaultForm : GenreForm = { name: "", url:""};
   const [genres, setGenres] = useState<Genre[]>([]);
   const [form, setForm] = useState<GenreForm>(defaultForm);
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -106,6 +106,15 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
+          <label>
+            url
+          </label>
+          <input
+            type="text"
+            placeholder="Name"
+            value={form.url}
+            onChange={(e) => setForm({ ...form, url: e.target.value })}
+          />
           <button type="submit">{selectedGenre ? "Update" : "Add"}</button>
         </form>
       </div>
@@ -122,6 +131,7 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>url</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -130,6 +140,7 @@ export const GenresTable = ({neededRole} :{neededRole: Role[]}) => {
               <tr key={genre.id_genre}>
                 <td>{genre.id_genre}</td>
                 <td>{genre.name}</td>
+                <td>{genre.url}</td>
                 <td>
                 <button
                         style={{

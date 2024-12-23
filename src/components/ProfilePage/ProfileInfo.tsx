@@ -21,16 +21,18 @@ export const ProfileInfo = ({jwt, dispatch} : {jwt : string, dispatch : AppDispa
     <div className="profile-info-container">
       <LoadingWrapper dispatch={dispatch}>
         <div className="profile-info">
-          <h2>Profile Info</h2>
+          <h2>Информация о профиле</h2>
           {profile ? (
             <div className="profile-details">
-              <p><span className="label">Name:</span> {profile.name}</p>
-              <p><span className="label">Email:</span> {profile.email}</p>
-              <p><span className="label">Phone number:</span> {profile.phone_number}</p>
-              <p><span className="label">Created date:</span> {profile.created_date.toLocaleString()}</p>
+              <p><span className="label">Имя:</span> {profile.name}</p>
+              <p><span className="label">Почта:</span> {profile.email}</p>
+              <p><span className="label">Номер телефона:</span> {profile.phone_number}</p>
+              <p><span className="label">Дата создания профиля:</span> {profile.created_date.toLocaleString()}</p>
+              <p> <span className='label'>Сумма долга</span> {profile.sum_payment} </p>
+              <p> <span className='label'>Кол-во задолженных книг</span> {profile.cnt_payment} </p>
             </div>
           ) : (
-            <p className="no-profile">No profile information available.</p>
+            <p className="no-profile">Нет информации о профиле</p>
           )}
         </div>
       </LoadingWrapper>

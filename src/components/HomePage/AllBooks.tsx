@@ -17,8 +17,16 @@ export const AllBooks = () => {
 
   return (
     <div>
+      <h1 style={{
+          fontSize: '32px',
+          fontWeight: 'bold',
+          marginBottom: '20px',
+          color: '#333',
+          textAlign: 'left',
+          paddingLeft: "15px"
+        }}>Все книги</h1>
       <LoadingWrapper dispatch={dispatch}>
-        <BookListToHtml booksList = {booksList}/>
+        <BookListToHtml booksList = {booksList} showAuthors={true}/>
       </LoadingWrapper>
     </div>
   )

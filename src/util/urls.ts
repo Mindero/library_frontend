@@ -1,3 +1,5 @@
+export const logo = 'src\\components\\image\\logo.jpg';
+
 const PREFIX = "http://127.0.0.1:8020/api";
 
 const READER_PREFIX = PREFIX + "/readers";
@@ -72,6 +74,7 @@ export const PENALTY_GET_ALL = PENALTY_PREFIX  + "/all_penalty";
 export const PENALTY_ADD = PENALTY_PREFIX  + "/add_penalty";
 export const PENALTY_UPDATE = PENALTY_PREFIX  + "/update_penalty/";
 export const PENALTY_DELETE = PENALTY_PREFIX  + "/delete_penalty/";
+export const PENALTY_GET_READERS = PENALTY_PREFIX + "/get_all_readers";
 
 const AUTHORS_BOOK_PREFIX = PREFIX + "/authors_book"
 export const AUTHORS_BOOK_GET_ALL = AUTHORS_BOOK_PREFIX + "/all_view_authorsBook"

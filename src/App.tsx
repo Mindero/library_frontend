@@ -1,4 +1,4 @@
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header/Header'
 import {store} from './store';
 import {Route, Routes, Router, BrowserRouter, Link, Navigate } from 'react-router-dom';
@@ -23,6 +23,15 @@ import { BookPublisherTable } from './components/TablePages/BookPublisherTable/B
 import { BookReaderTable } from './components/TablePages/BookReader/BookReaderTable';
 import { PenaltyTable } from './components/TablePages/PenaltyTable/PenaltyTable';
 import { AuthorsBookTable } from './components/TablePages/AuthorsBookView/AuthorsBookTable';
+import { AllBooks } from './components/HomePage/AllBooks';
+import { AllAuthorsInfo } from './components/HomePage/AllAuthorsInfo';
+import { PenaltyReadersTable } from './components/TablePages/PenaltyReaders/PenaltyReaders';
+import { CatalogSidebar } from './components/Sidebar/CatalogSidebar';
+import { setShowCatalogSideBar } from './reducer/settingsStore';
+import { settingsShowCatalogSideBar } from './reducer/settingsStore/reducer';
+import { getAllBooksGenres } from './Book';
+import { useEffect } from 'react';
+import { setBooksGenres } from './reducer/catalogStore';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -34,8 +43,17 @@ const ProtectedRoute = ({expression, children} : ProtectedRouteInterface) => {
 }
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getAllBooksGenres(dispatch).then((data) => {
+      console.log(data);
+      if (data !== undefined)
+        dispatch(setBooksGenres(data));
+    })
+  }, []);
   const isAuth : boolean= useSelector(userAuthSelector);
   const role : string | null = useSelector(userRoleSelector);
+  const sidebar = useSelector(settingsShowCatalogSideBar);
   return (
     <BrowserRouter>
       <div className='App'>
@@ -43,6 +61,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to = "/home"/>}/>
             <Route path="/home" element={<HomePage/>}/>
+            <Route path="/allBooks" element={<AllBooks/>}/>
+            <Route path="/allAuthor" element={<AllAuthorsInfo/>}/>
             <Route path="/profile" element={<ProtectedRoute expression={isAuth}><ProfilePage/></ProtectedRoute>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
@@ -60,8 +80,10 @@ function App() {
             <Route path="/book_reader" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookReaderTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/penalty" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/authors_book" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><AuthorsBookTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
-            <Route path="*" element={<div>Not Found</div>}/>
+            <Route path="/allPenaltyReader" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyReadersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="*" element={<div>Страница не найдена</div>}/>
           </Routes>
+        <CatalogSidebar/>
       </div>
     </BrowserRouter>
   );

@@ -25,7 +25,7 @@ export const LoadingWrapper : React.FC<LoadingWrapperPros> = ({children, dispatc
           fontWeight: 'bold',
           color: '#007bff'
         }}>
-          Loading...
+          Загрузка...
         </div>
       ) : showModal ? (
         <ModalWrapper dispatch={dispatch} />

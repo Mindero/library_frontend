@@ -161,7 +161,7 @@ export const BookReaderTable = ({neededRole} :{neededRole: Role[]}) => {
               <tr key={book_reader.id_book_reader}>
                 <td>{book_reader.id_book_reader}</td>
                 <td>{book_reader.book_name}</td>
-                <td>{book_reader.publisher}</td>
+                <td>{book_reader.publisher_name}</td>
                 <td>{book_reader.reader_ticket}</td>
                 <td>{book_reader.id_instance}</td>
                 <td>{book_reader.borrow_date}</td>

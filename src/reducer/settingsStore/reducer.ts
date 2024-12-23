@@ -26,9 +26,13 @@ export const settingsSlice = createSlice({
       state.error = null;
       state.showModal = false;
     },
+    setShowCatalogSideBar: (state, action: PayloadAction<boolean>) => {
+      state.showCatalogSideBar = action.payload;
+    },
   }
 });
 
 export const settingsLoading = (state: AppState) => state.settingsStore.loading;
 export const settingsError = (state: AppState) => state.settingsStore.error;
 export const settingsShowModal = (state: AppState) => state.settingsStore.showModal;
+export const settingsShowCatalogSideBar = (state: AppState) => state.settingsStore.showCatalogSideBar;

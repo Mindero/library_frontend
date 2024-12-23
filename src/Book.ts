@@ -1,8 +1,9 @@
-import axios from "axios";
-import { GET_BOOK_BY_NAME_URL, VIEW_BOOKS_GET_ALL_URL, VIEW_BOOKS_GET_BY_NAME } from "./util/urls";
+import axios, { AxiosResponse } from "axios";
+import { GENRE_GET_ALL, GET_BOOK_BY_NAME_URL, VIEW_BOOKS_GET_ALL_URL, VIEW_BOOKS_GET_BY_NAME } from "./util/urls";
 import { Author } from "./Authors";
 import { AppDispatch } from "./store";
 import { clearError, disableModal, setError, showModal, startLoading, stopLoading } from "./reducer/settingsStore";
+import { Genre } from "./reducer/catalogStore/initState";
 
 export interface Book {
   book_name: string,
@@ -52,6 +53,21 @@ export const getBookFormById = async (id : number, dispatch: AppDispatch) => {
     const res = await axios.get(GET_BOOK_BY_NAME_URL + id,);
     const data = res.data;
     return data;
+  }
+  catch (error){
+    dispatch(showModal());
+    dispatch(setError(`Can't get book by name ${error}`));
+  }
+  finally{
+    dispatch(stopLoading());
+  }
+}
+
+export const getAllBooksGenres = async (dispatch: AppDispatch) => {
+  try{
+    dispatch(startLoading());
+    const res : AxiosResponse<Genre[]> = await axios.get<Genre[]>(GENRE_GET_ALL);
+    return res.data;
   }
   catch (error){
     dispatch(showModal());

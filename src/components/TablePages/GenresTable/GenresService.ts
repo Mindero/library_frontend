@@ -4,7 +4,8 @@ import { AppDispatch } from "../../../store";
 import { setError, showModal, startLoading, stopLoading } from "../../../reducer/settingsStore";
 
 export interface GenreForm{
-  name: string,
+  name: string
+  url: string
 }
 
 export interface Genre extends GenreForm {

@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../ui/Header.css'
 
 export const SearchBar = () => {
   const [query, setQuery] = useState<string>("");
@@ -10,7 +11,8 @@ export const SearchBar = () => {
     setQuery(e.target.value);
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); 
     console.log(query);
     (query !== "") ? 
     navigate(`/search/${query}`)
@@ -18,15 +20,32 @@ export const SearchBar = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="search-bar">
+      <form onSubmit={onSubmit} className="search-form">
         <input 
           type="text"
           value={query}
           onChange = {onClick}
           placeholder="Впишите название книги"
+          className="search-input"
         />
-        <button type = "submit"> Найти </button>
+       <button type="submit" className="search-button" aria-label="Найти">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="search-icon"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
       </form>
     </div>
   )

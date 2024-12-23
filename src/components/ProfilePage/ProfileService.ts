@@ -64,10 +64,13 @@ export const getProfilePenalty = async (jwt: string | null, dispatch : AppDispat
 
 const toProfileForm = (data : any) : ProfileForm => {
   const res : ProfileForm = 
-  { name: data.name, 
+  { 
+    name: data.name, 
     email: data.email, 
     phone_number: data.phone_number, 
     created_date: data.created_date,
+    sum_payment: data.sum_payment,
+    cnt_payment: data.cnt_payment
   };
   return res;
 }

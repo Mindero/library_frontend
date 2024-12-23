@@ -14,7 +14,7 @@ export const LogoutInfo = () => {
   
   return (
     <div>
-      <button className = "auth-button register-button" type = "button" onClick={logoutHandler}> Logout </button>
+      <button className = "auth-button register-button" type = "button" onClick={logoutHandler}> Выйти </button>
     </div>
   )
 }

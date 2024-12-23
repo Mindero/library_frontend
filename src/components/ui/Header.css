@@ -1,73 +1,82 @@
-.header-container {
-  padding: 20px;
-  background-color: #f1f1f1;
-  border-bottom: 2px solid #ddd;
-  font-family: Arial, sans-serif;
-}
-
+/* Header Styles */
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.home-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  text-transform: uppercase;
+.home-button img {
+  width: 50px;
+  height: auto;
 }
 
-.home-button:hover {
-  background-color: #0056b3;
-}
-
-.auth-section {
+.catalog {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+}
+
+.catalog-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .search-bar {
-  flex-grow: 1;
   display: flex;
-  justify-content: flex-end;
-}
-.auth-container {
-  display: flex;
-  gap: 15px;
   justify-content: center;
-  margin-left: 15px;
-  font-family: Arial, sans-serif;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 500px;
+  /* width: 100%; */
+  max-width: 700px;
 }
 
-.auth-button {
+.search-form {
+  display: flex;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
   padding: 10px 15px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-transform: uppercase;
+  border: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  outline: none;
 }
 
-.login-button {
-  background-color: #28a745;
-  color: #fff;
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
-.login-button:hover {
-  background-color: #218838;
-}
-
-.register-button {
+.search-button {
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
+.search-button:hover {
   background-color: #0056b3;
+}
+
+.search-button:active {
+  background-color: #003f88;
 }

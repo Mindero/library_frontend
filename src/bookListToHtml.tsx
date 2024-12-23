@@ -4,9 +4,10 @@ import {Book} from "./Book";
 import './components/ui/bookListToHtml.css'
 
 interface BooksProps {
-  booksList: Book[];
+  booksList: Book[],
+  showAuthors : boolean,
 }
-export const BookListToHtml = ({booksList} : BooksProps) : JSX.Element => {
+export const BookListToHtml = ({booksList, showAuthors} : BooksProps) : JSX.Element => {
   const navigate = useNavigate();
 
   const onClick = (id_book:number) => {
@@ -18,9 +19,11 @@ export const BookListToHtml = ({booksList} : BooksProps) : JSX.Element => {
     return (
       <div className="book-item" data-index={index} key={book.id_book}>
         <p>
-          Book name: <button className="book-name" onClick={() => onClick(book.id_book)}>{book.book_name}</button>
+          Название книги: <button className="book-name" onClick={() => onClick(book.id_book)}>{book.book_name}</button>
         </p>
-        <AllAuthors authors={book.authors} />
+        {
+          (showAuthors) ? <AllAuthors authors={book.authors} /> : <></>
+        }
         <hr className="separator" />
       </div>
     );

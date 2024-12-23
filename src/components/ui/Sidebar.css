@@ -1,0 +1,111 @@
+/* Основные стили для панели */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Скрытая по умолчанию */
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar.open {
+  left: 0; /* Показываем панель */
+}
+
+/* Стили для закрытия иконки */
+.sidebar .close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.sidebar-outside-section {
+  border-right: 2px solid var(--base-100);
+}
+
+/* Стили для кнопок выбора типа */
+.catalog-choice {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.catalog-choice:hover {
+  background-color: #f1f1f1;
+}
+
+.catalog-choice.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Анимация для смены содержимого между "Книги" и "Авторы" */
+.sidebar-inner-section {
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  position: absolute;
+  left: 270px;
+  top: 0;
+  overflow: hidden;
+   transition: transform 0.5s ease, opacity 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.sidebar-inner-section.open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar-inner-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.inner-choice,
+.sidebar-inner-section li {
+  margin: 10px 0;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.inner-choice:hover,
+.sidebar-inner-section li:hover {
+  color: #007bff;
+}
+
+
+/* Фон для затемнения */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.sidebar h3 {
+  font-size: 20px;
+  color: #007bff; /* Яркий цвет для выделения */
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #007bff; /* Линия под заголовком */
+  text-align: left; /* Выравнивание текста */
+  font-weight: bold;
+}

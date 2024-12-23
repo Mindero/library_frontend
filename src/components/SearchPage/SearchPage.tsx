@@ -22,7 +22,7 @@ export const SearchPage = () => {
   
   return (
     <div>
-      <BookListToHtml booksList={booksList}/>
+      <BookListToHtml booksList={booksList} showAuthors={true}/>
     </div>
   )
 }

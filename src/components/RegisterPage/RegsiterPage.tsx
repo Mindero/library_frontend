@@ -57,13 +57,13 @@ export default function RegisterPage() {
           fontSize: '24px',
           marginBottom: '20px'
         }}>
-          RegisterPage
+          Регистрация
         </h2>
         <div style={{
           marginBottom: '10px',
           width: '100%'
         }}>
-          <p style={{ marginBottom: '5px' }}>Name</p>
+          <p style={{ marginBottom: '5px' }}>Имя</p>
           <input
             style={{
               width: '100%',
@@ -81,7 +81,7 @@ export default function RegisterPage() {
           marginBottom: '10px',
           width: '100%'
         }}>
-          <p style={{ marginBottom: '5px' }}>Email</p>
+          <p style={{ marginBottom: '5px' }}>Почта</p>
           <input
             style={{
               width: '100%',
@@ -99,7 +99,7 @@ export default function RegisterPage() {
           marginBottom: '10px',
           width: '100%'
         }}>
-          <p style={{ marginBottom: '5px' }}>Phone number</p>
+          <p style={{ marginBottom: '5px' }}>Номер телефона</p>
           <input
             style={{
               width: '100%',
@@ -117,7 +117,7 @@ export default function RegisterPage() {
           marginBottom: '10px',
           width: '100%'
         }}>
-          <p style={{ marginBottom: '5px' }}>Password</p>
+          <p style={{ marginBottom: '5px' }}>Пароль</p>
           <input
             style={{
               width: '100%',
@@ -145,7 +145,7 @@ export default function RegisterPage() {
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#0056b3')}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#007BFF')}
         >
-          Register
+          Зарегестрироваться
         </button>
         {incorrectField && (
           <div style={{

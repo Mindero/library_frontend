@@ -8,7 +8,7 @@ export const AdminRights = () => {
   }
   return (
     <div>
-      <p>Admin rights </p>
+      <p>Права админа </p>
       <span>
         <button onClick={() => navigateHandle("/readers")}>Readers table</button>
         <button onClick={() => navigateHandle("/authors")}>Authors table</button>
@@ -22,6 +22,7 @@ export const AdminRights = () => {
         <button onClick={() => navigateHandle("/book_reader")}>Book_reader table</button>
         <button onClick={() => navigateHandle("/penalty")}>Penalty table</button>
       </span>
+      <button onClick={() => navigateHandle("/allPenaltyReader")}>Все должники</button>
     </div>
   )
 }

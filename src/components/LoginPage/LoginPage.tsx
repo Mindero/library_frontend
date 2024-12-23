@@ -64,14 +64,14 @@ export default function LoginPage() {
           fontSize: '24px',
           marginBottom: '20px'
         }}>
-          LoginPage
+          Логин
         </h2>
         <div style={{
           marginBottom: '10px',
           width: '300px',
           textAlign: 'left'
         }}>
-          <p style={{ marginBottom: '5px' }}>Email</p>
+          <p style={{ marginBottom: '5px' }}>Почта</p>
           <input
             style={{
               width: '100%',
@@ -91,7 +91,7 @@ export default function LoginPage() {
           width: '300px',
           textAlign: 'left'
         }}>
-          <p style={{ marginBottom: '5px' }}>Password</p>
+          <p style={{ marginBottom: '5px' }}>Пароль</p>
           <input
             style={{
               width: '100%',
@@ -121,7 +121,7 @@ export default function LoginPage() {
           onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
           onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
         >
-          Login
+          Войти
         </button>
         {loginInfo && (
           <div style={{

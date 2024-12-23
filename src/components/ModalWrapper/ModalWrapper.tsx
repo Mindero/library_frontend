@@ -42,7 +42,7 @@ export const ModalWrapper : React.FC<ModelWrapperPros> = ({dispatch}) => {
         }}
       >
         <p style={{ marginBottom: "20px", color: "#d9534f", fontWeight: "bold" }}>
-          Error: {error}
+          Ошибка: {error}
         </p>
         <button
           onClick={() => onClick()}

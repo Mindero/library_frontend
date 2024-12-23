@@ -11,8 +11,8 @@ export const AuthContainer = () =>{
 
   return (
     <div className="auth-container">
-      <button className="auth-button login-button" onClick={() => navHandler("/login")}>Login</button>
-      <button className="auth-button register-button" onClick={() => navHandler("/register")}>Register</button>
+      <button className="auth-button login-button" onClick={() => navHandler("/login")}>Логин</button>
+      <button className="auth-button register-button" onClick={() => navHandler("/register")}>Регистрация</button>
     </div>
   );
 }

@@ -30,9 +30,9 @@ export const ProfileBooks = ({jwt, dispatch} : {jwt : string, dispatch: AppDispa
       console.log(penalty[index])
       return (
       <div>
-        <p> Просрочена сдача! </p>
+        <p  style={{color: '#d9534f'}}> Просрочена сдача! </p>
         <p> Просрочено с {penalty[index].start_time} </p>
-        <p> Плата за каждый день: {penalty[index].payment}</p>
+        <p> Штраф: {penalty[index].payment}р</p>
       </div>)
     }
   }

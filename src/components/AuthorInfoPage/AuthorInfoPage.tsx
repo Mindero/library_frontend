@@ -8,8 +8,9 @@ import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
 export const AuthorInfoPage = () => {
   const {id_author} = useParams();
   if (id_author === undefined) <Navigate to = "/"/>
-
+  const number_id = Number(id_author);
   const [authorForm, setAuthorForm] = useState<AuthorForm>({
+    "id_author": number_id,
     "author_name": "",
     "books":[],
   });
@@ -21,6 +22,7 @@ export const AuthorInfoPage = () => {
       getAuthorBooksById(id_author, dispatch).then(books => {
         if (author !== undefined && books !== undefined){
           setAuthorForm({
+            "id_author":number_id,
             "author_name": author.name,
             "books": books
           });
@@ -39,7 +41,7 @@ export const AuthorInfoPage = () => {
           textAlign: 'left',
           paddingLeft: "15px"
         }}>{authorForm.author_name}</h1>
-        <BookListToHtml booksList = {authorForm.books}/>
+        <BookListToHtml booksList = {authorForm.books} showAuthors={true}/>
       </LoadingWrapper>
     </div>
   )

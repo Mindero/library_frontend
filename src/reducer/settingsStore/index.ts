@@ -6,7 +6,8 @@ export const{
   stopLoading,
   clearError,
   showModal,
-  disableModal
+  disableModal,
+  setShowCatalogSideBar,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
