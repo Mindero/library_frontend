@@ -1,36 +1,52 @@
 .book-list-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Сетка с адаптивными колонками */
+  gap: 16px; /* Расстояние между элементами */
+  padding: 16px;
+  width: 100%;
 }
 
 .book-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border: 1px solid hsl(0, 0%, 87%);
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  /* Ограничение высоты */
+  height: 200px; /* Задаем фиксированную высоту */
+  overflow: hidden; /* Скрываем содержимое, если оно превышает высоту */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.book-item p {
-  margin: 5px 0;
-  font-size: 16px;
+.book-item:hover {
+  transform: scale(1.05); /* Легкое увеличение на ховер */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .book-name {
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 0;
 }
 
-.separator {
-  margin-top: 10px;
-  border: 0;
-  border-top: 1px solid #ddd;
+.book-name-button {
+  font-size: inherit; /* Унаследовать размер шрифта от .book-name */
+  font-weight: inherit; /* Унаследовать толщину шрифта от .book-name */
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+}
+
+.book-name-button:hover {
+  text-decoration: underline;
 }

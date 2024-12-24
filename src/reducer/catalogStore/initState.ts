@@ -1,3 +1,5 @@
+import { AuthorBook } from "../../util/authorListToHtml";
+
 export interface Genre {
   id: number
   name: string,
@@ -5,9 +7,13 @@ export interface Genre {
 }
 
 interface CatalogState {
-  bookGenres: Genre[]
+  bookGenres: Genre[],
+  expandedAuthor: number | null,
+  expandedAuthorBooks: AuthorBook[],
 }
 
 export const initialState: CatalogState = {
   bookGenres: [],
+  expandedAuthor: null,
+  expandedAuthorBooks:[]
 };

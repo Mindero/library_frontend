@@ -30,11 +30,11 @@ export const getAllBooks = async (dispatch : AppDispatch) => {
   }
 }
 
-export const getBooksByName = async (name : string, dispatch: AppDispatch) => {
+export const getBooksBy = async (params:any, dispatch: AppDispatch) => {
   // console.log("URL " + VIEW_BOOKS_GET_BY_NAME);
   try{
     dispatch(startLoading());
-    const res = await axios.get(VIEW_BOOKS_GET_BY_NAME + name);
+    const res:AxiosResponse<Book[]> = await axios.get<Book[]>(VIEW_BOOKS_GET_ALL_URL, {params});
     const data = res.data;
     return data;
   }

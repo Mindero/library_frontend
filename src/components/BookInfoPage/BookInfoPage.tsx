@@ -1,6 +1,6 @@
 import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { AllAuthors } from "../../AllAuthors";
+import { AllAuthors } from "../../util/AllAuthors";
 import { Book, getBookFormById } from "../../Book";
 import { BookInstance } from "./BookInstance";
 import { useDispatch } from "react-redux";

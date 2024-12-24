@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from '../Header/SearchBar';
 import { AllBooks } from './AllBooks';
 import { useNavigate } from 'react-router-dom';
 

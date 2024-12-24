@@ -4,25 +4,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setShowCatalogSideBar } from '../../reducer/settingsStore';
 import { catalogBooksGenres } from '../../reducer/catalogStore/reducer';
 import { Genre } from '../../reducer/catalogStore/initState';
+import { navigateHandler } from '../../util/searchNavigateHandler';
 export const SidebarBooks = () : JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigateHandler = (to: string) => {
-    dispatch(setShowCatalogSideBar(false));
-    navigate(to);
-  }
   const genres : Genre[] = useSelector(catalogBooksGenres);
 
   return (
     <div>
-      <div className='inner-choice' onClick={() => navigateHandler("/allBooks")}>
+      <div className='inner-choice' onClick={() =>{
+        dispatch(setShowCatalogSideBar(false));
+        navigateHandler({type:"books"}, navigate)}
+        }>
         Все книги
       </div>
       <h3> Жанры книг </h3>
       <ul>
         {genres.map((genre : Genre) => {
           return (
-            <li onClick={() => navigateHandler(`/books/genre={${genre.url}}`)}>
+            <li onClick={() =>{ 
+              dispatch(setShowCatalogSideBar(false));
+              navigateHandler({type:"books", genre: genre.url}, navigate)}
+              }>
               {genre.name}
             </li>
           )

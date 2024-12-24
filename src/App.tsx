@@ -7,7 +7,7 @@ import RegisterPage from './components/RegisterPage/RegsiterPage'
 import LoginPage from './components/LoginPage/LoginPage';
 
 import { userAuthSelector, userJwtSelector, userRoleSelector } from './reducer/userStore/reducer';
-import { SearchPage } from './components/SearchPage/SearchPage';
+import { SearchBookPage } from './components/SearchPage/Book/SearchBookPage';
 import { BookInfoPage } from './components/BookInfoPage/BookInfoPage';
 import { AuthorInfoPage } from './components/AuthorInfoPage/AuthorInfoPage';
 import { ProfilePage } from './components/ProfilePage/ProfilePage';
@@ -32,6 +32,7 @@ import { settingsShowCatalogSideBar } from './reducer/settingsStore/reducer';
 import { getAllBooksGenres } from './Book';
 import { useEffect } from 'react';
 import { setBooksGenres } from './reducer/catalogStore';
+import { SearchWrapper } from './components/SearchPage/SearchWrapper';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -61,12 +62,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to = "/home"/>}/>
             <Route path="/home" element={<HomePage/>}/>
-            <Route path="/allBooks" element={<AllBooks/>}/>
             <Route path="/allAuthor" element={<AllAuthorsInfo/>}/>
             <Route path="/profile" element={<ProtectedRoute expression={isAuth}><ProfilePage/></ProtectedRoute>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
-            <Route path="/search/:name" element={<SearchPage/>}/>
+            <Route path="/search" element={<SearchWrapper />} />
             <Route path="/book/:id_book" element={<BookInfoPage/>}/>
             <Route path="/author/:id_author" element={<AuthorInfoPage/>}/>
             <Route path="/readers" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><ReadersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>

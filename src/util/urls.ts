@@ -13,9 +13,9 @@ export const READER_DELETE = READER_PREFIX + "/delete_reader/";
 export const READER_GET_PENALTY = READER_PREFIX + "/get_penalty/{reader_id}";
 
 const VIEW_BOOK_PREFIX = PREFIX + "/view_book";
-export const VIEW_BOOKS_GET_ALL_URL = VIEW_BOOK_PREFIX + "/all_view_books";
+export const VIEW_BOOKS_GET_ALL_URL = VIEW_BOOK_PREFIX + "/all_view_books/";
 export const VIEW_BOOKS_GET_BY_NAME = VIEW_BOOK_PREFIX + "/";
-export const VIEW_BOOKS_GET_BY_AUTHOR_ID = VIEW_BOOK_PREFIX + "/author/{id}?author_id=";
+export const VIEW_BOOKS_GET_BY_AUTHOR_ID = VIEW_BOOK_PREFIX + "/author/";
 
 const BOOK_PREFIX = PREFIX + "/books";
 export const GET_BOOK_BY_NAME_URL = BOOK_PREFIX + "/book_info/";

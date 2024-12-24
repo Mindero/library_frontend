@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Author } from "./Authors";
+import { Author } from "../Authors";
 
 interface AllAuthorsProps {
   authors: Author[];
@@ -25,8 +25,8 @@ export const AllAuthors = ({ authors } : AllAuthorsProps) : JSX.Element => {
       <span style={{ fontWeight: 'bold', color: '#333', marginRight: '5px' }}>Авторы:</span>
       {authors.map((author) => (
         <button
-          key={author.id}
-          onClick={() => onClick(author.id)}
+          key={author.id_author}
+          onClick={() => onClick(author.id_author)}
           style={{
             backgroundColor: '#6c757d',
             color: '#fff',

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { AllAuthors } from "./AllAuthors";
-import {Book} from "./Book";
-import './components/ui/bookListToHtml.css'
+import {Book} from "../Book";
+import '../components/ui/bookListToHtml.css'
 
 interface BooksProps {
   booksList: Book[],
@@ -15,16 +15,14 @@ export const BookListToHtml = ({booksList, showAuthors} : BooksProps) : JSX.Elem
   }
 
   const res: JSX.Element[] = booksList.map((book, index) => {
-    // Добавляем return перед JSX
     return (
-      <div className="book-item" data-index={index} key={book.id_book}>
-        <p>
-          Название книги: <button className="book-name" onClick={() => onClick(book.id_book)}>{book.book_name}</button>
+      <div className="book-item" data-index={index} key={book.id_book} onClick={() => onClick(book.id_book)}>
+        <p className="book-name">
+          Название книги: <button className="book-name-button">{book.book_name}</button>
         </p>
         {
           (showAuthors) ? <AllAuthors authors={book.authors} /> : <></>
         }
-        <hr className="separator" />
       </div>
     );
   });

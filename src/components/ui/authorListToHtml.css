@@ -1,0 +1,121 @@
+/* Контейнер для списка авторов */
+.author-list-to-html-container {
+  width: 100%; /* Растягиваем контейнер на всю ширину экрана */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Карточка автора */
+.author-to-html-item {
+  width: 100%;
+  max-width: 800px; /* Максимальная ширина для карточки автора */
+  background-color: #f4f4f4; /* Цвет фона карточки */
+  border-radius: 8px; /* Округлые углы */
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.author-to-html-item:hover {
+  transform: translateY(-5px); /* Немного поднимем карточку при наведении */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличиваем тень */
+}
+
+/* Заголовок карточки автора */
+.author-to-html-header {
+  display: flex;
+  justify-content: space-between; /* Кнопка и имя автора по бокам */
+  align-items: center;
+}
+
+.author-to-html-header h3 {
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0;
+}
+
+.profile-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+  background-color: #0056b3;
+}
+
+/* Детали автора (когда раскрыта информация) */
+.author-to-html-details {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.author-to-html-search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.author-to-html-search-input::placeholder {
+  color: #888;
+}
+
+/* Список книг */
+.author-to-html-book-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.author-to-html-book-item {
+  background-color: #f9f9f9;
+  padding: 8px 16px;
+  margin: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.author-to-html-book-item:hover {
+  background-color: #e0e0e0;
+}
+
+/* Сообщение, если нет результатов */
+.author-to-html-no-results {
+  color: #777;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Для адаптивности */
+@media (max-width: 768px) {
+  .author-to-html-item {
+    padding: 15px;
+  }
+
+  .author-to-html-header h3 {
+    font-size: 20px;
+  }
+
+  .profile-button {
+    padding: 6px 12px;
+  }
+
+  .author-to-html-search-input {
+    font-size: 14px;
+  }
+
+  .author-to-html-book-item {
+    font-size: 14px;
+  }
+}

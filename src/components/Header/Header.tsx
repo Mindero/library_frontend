@@ -4,7 +4,7 @@ import {ProfileInfo} from './ProfileInfo'
 import { AuthWrapper } from './AuthWrapper';
 import { useNavigate } from 'react-router-dom';
 import { LogoutInfo } from './LogoutInfo';
-import { SearchBar } from '../HomePage/SearchBar';
+import { SearchBar } from './SearchBar';
 import '../ui/Header.css'
 import logo from '../image/logo.jpg'
 import { Catalog } from './Catalog';

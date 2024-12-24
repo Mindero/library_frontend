@@ -1,7 +1,7 @@
 import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { AuthorForm, getAuthorBooksById, getAuthorById } from "./AuthorForm";
-import { BookListToHtml } from "../../bookListToHtml";
+import { BookListToHtml } from "../../util/bookListToHtml";
 import { useDispatch } from "react-redux";
 import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
 
@@ -41,7 +41,7 @@ export const AuthorInfoPage = () => {
           textAlign: 'left',
           paddingLeft: "15px"
         }}>{authorForm.author_name}</h1>
-        <BookListToHtml booksList = {authorForm.books} showAuthors={true}/>
+        <BookListToHtml booksList = {authorForm.books} showAuthors={false}/>
       </LoadingWrapper>
     </div>
   )

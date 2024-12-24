@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../ui/Header.css'
+import { navigateHandler } from "../../util/searchNavigateHandler";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState<string>("");
@@ -15,18 +16,18 @@ export const SearchBar = () => {
     e.preventDefault(); 
     console.log(query);
     (query !== "") ? 
-    navigate(`/search/${query}`)
+    navigateHandler({name:query}, navigate)
     : console.log("query is empty"); 
   }
 
   return (
-    <div className="search-bar">
+    <div className="search-bar" >
       <form onSubmit={onSubmit} className="search-form">
         <input 
           type="text"
           value={query}
           onChange = {onClick}
-          placeholder="Впишите название книги"
+          placeholder="Я ищу..."
           className="search-input"
         />
        <button type="submit" className="search-button" aria-label="Найти">

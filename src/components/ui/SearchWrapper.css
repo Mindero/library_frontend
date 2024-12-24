@@ -1,0 +1,174 @@
+/* Общие стили для контейнера */
+.search-wrapper {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для контейнера с кнопками */
+.search-options {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Стили для кнопок */
+.search-option {
+  flex: 1;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  color: #555;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+.search-option:hover {
+  background-color: #e0e0e0;
+}
+
+.search-option.active:hover {
+  background-color: #0056b3; /* Цвет фона при наведении на активную кнопку */
+  border-color: #0056b3; /* Цвет рамки при наведении на активную кнопку */
+}
+
+/* Стили для активной кнопки */
+.search-option.active {
+  background-color: #007bff; /* Цвет фона для активного состояния */
+  color: white; /* Белый цвет текста для активной кнопки */
+  transform: scale(1.05); /* Легкое увеличение при активации */
+  border-color: #007bff; /* Соответствующий цвет рамки для активной кнопки */
+}
+
+/* Общий стиль для страницы поиска */
+.search-page {
+  display: flex;
+  gap: 20px; /* Отступ между фильтрами и списком книг */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Левая панель фильтров */
+.filters {
+  flex: 0 0 300px; /* Фиксированная ширина 300px */
+  background-color: #f9f9f9; /* Светлый фон */
+  border: 1px solid #ddd; /* Обводка */
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для фильтров */
+  box-sizing: border-box;
+  height: 100vh; /* Высота в пределах flex-контейнера */
+}
+
+/* Список книг */
+.outter-book-list-container {
+  flex: 1; /* Занимает оставшееся пространство */
+  max-height: 400px; /* Ограничиваем ширину списка книг */
+  gap: 20px; /* Расстояние между карточками книг */
+  box-sizing: border-box; /* Обеспечиваем, что padding и border не увеличивают размер элементов */
+  margin: 0;
+  padding: 0;
+}
+
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-form label {
+  margin-bottom: 5px;
+}
+
+.filter-form select, .filter-form input {
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.books-list {
+  flex-grow: 1;
+}
+
+/* Кнопка "Применить фильтры" */
+.apply-filters-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%; /* Выравнивание по ширине контейнера */
+  margin-top: 20px; /* Отступ сверху */
+}
+
+.apply-filters-button:hover {
+  background-color: #0056b3; /* Цвет кнопки при наведении */
+  transform: scale(1.05); /* Легкое увеличение кнопки при наведении */
+}
+
+.apply-filters-button:focus {
+  outline: none; /* Убирает контур при фокусе */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Добавление подсветки при фокусе */
+}
+
+/* Стили для лейбла */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Стандартный чекбокс */
+.checkbox {
+  display: none; /* Скрываем стандартный чекбокс */
+}
+
+/* Кастомная стилизация чекбокса */
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  margin-left: 10px;
+  position: relative;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Стиль активного чекбокса */
+.checkbox:checked + .checkbox-custom {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  top: 4px;
+  left: 4px;
+  border-radius: 2px;
+}
+
+/* Стиль при наведении */
+.checkbox-custom:hover {
+  background-color: #e6f0ff;
+  border-color: #0056b3;
+}
+
+.checkbox-custom:active {
+  transform: scale(0.98);
+}
