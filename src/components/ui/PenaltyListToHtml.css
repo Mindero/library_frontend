@@ -1,0 +1,115 @@
+/* Контейнер для всех штрафов */
+.penalty-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Индивидуальный штраф */
+.penalty-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.penalty-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок штрафа */
+.penalty-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #007bff;  /* Синий для заголовка */
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Блок информации о читателе */
+.penalty-reader-info {
+  background-color: #e9ecef;  /* Светло-серый фон */
+  border-left: 4px solid #007bff;  /* Синий для акцента */
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.penalty-reader-ticket,
+.penalty-reader-name,
+.penalty-reader-email {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.penalty-reader-ticket {
+  font-weight: 600;
+  color: #007bff;  /* Синий для выделения номера билета */
+}
+
+/* Блок информации о книге */
+.penalty-book-info {
+  background-color: #f1f3f5;  /* Очень светлый серый фон */
+  border-left: 4px solid #6c757d;  /* Серый для акцента */
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.penalty-book-title {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+/* Название книги как кнопка */
+.penalty-book-name-button {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.penalty-book-name-button:hover {
+  color: #0056b3;  /* Темно-синий при наведении */
+}
+
+/* Кнопка для открытия/закрытия всех просроченных книг */
+.penalty-toggle-books {
+  cursor: pointer;
+  color: #007bff;  /* Синий для кнопки */
+  font-weight: 600;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.penalty-toggle-books.active {
+  color: #0056b3;  /* Темно-синий для активного состояния */
+}
+
+.penalty-toggle-books:hover {
+  color: #003366;  /* Еще более темный синий при наведении */
+}
+
+/* Иконка для стрелки */
+.penalty-toggle-books::after {
+  content: " ▼";  /* Иконка стрелки вниз */
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.penalty-toggle-books.active::after {
+  content: " ▲";  /* Иконка стрелки вверх */
+}

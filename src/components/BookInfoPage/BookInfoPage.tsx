@@ -5,6 +5,7 @@ import { Book, getBookFormById } from "../../Book";
 import { BookInstance } from "./BookInstance";
 import { useDispatch } from "react-redux";
 import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
+import "../ui/BookInfoPage.css"
 
 export const BookInfoPage = () => {
   const {id_book} = useParams();
@@ -29,8 +30,10 @@ export const BookInfoPage = () => {
   return (
     <div>
       <LoadingWrapper dispatch={dispatch}>
-        <h1>{bookForm.book_name}</h1>
-        <AllAuthors authors={bookForm.authors} />
+        <div className="book-profile-main-info">
+          <h1>{bookForm.book_name}</h1>
+          <AllAuthors authors={bookForm.authors} />
+        </div>
         <BookInstance id_book={id}/>
       </LoadingWrapper>
     </div>

@@ -31,8 +31,13 @@ import { setShowCatalogSideBar } from './reducer/settingsStore';
 import { settingsShowCatalogSideBar } from './reducer/settingsStore/reducer';
 import { getAllBooksGenres } from './Book';
 import { useEffect } from 'react';
-import { setBooksGenres } from './reducer/catalogStore';
+import { setAuthorCountries, setBooksGenres } from './reducer/catalogStore';
 import { SearchWrapper } from './components/SearchPage/SearchWrapper';
+import { getAllAuthorsCountry } from './Authors';
+import "./components/ui/App.css"
+import { SupplyView } from './components/TablePages/SupplyView/SupplyView';
+import { OrderView } from './components/TablePages/OrderView/OrderView';
+import { PenaltyView } from './components/TablePages/PenaltyView/PenaltyView';
 
 interface ProtectedRouteInterface {
   expression: boolean;
@@ -47,10 +52,15 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     getAllBooksGenres(dispatch).then((data) => {
-      console.log(data);
       if (data !== undefined)
         dispatch(setBooksGenres(data));
     })
+
+    getAllAuthorsCountry(dispatch).then((data) => {
+      console.log(`authors = ${data}`);
+      if (data !== undefined)
+        dispatch(setAuthorCountries(data));
+    });
   }, []);
   const isAuth : boolean= useSelector(userAuthSelector);
   const role : string | null = useSelector(userRoleSelector);
@@ -62,7 +72,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to = "/home"/>}/>
             <Route path="/home" element={<HomePage/>}/>
-            <Route path="/allAuthor" element={<AllAuthorsInfo/>}/>
             <Route path="/profile" element={<ProtectedRoute expression={isAuth}><ProfilePage/></ProtectedRoute>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
@@ -80,7 +89,9 @@ function App() {
             <Route path="/book_reader" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><BookReaderTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/penalty" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="/authors_book" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><AuthorsBookTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
-            <Route path="/allPenaltyReader" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyReadersTable neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/penaltyView" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><PenaltyView neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/supplyView" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><SupplyView neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
+            <Route path="/orderView" element={<ProtectedRoute expression={isAuth && role === Role[Role.ADMIN]}><OrderView neededRole={[Role.ADMIN]}/></ProtectedRoute>}/>
             <Route path="*" element={<div>Страница не найдена</div>}/>
           </Routes>
         <CatalogSidebar/>

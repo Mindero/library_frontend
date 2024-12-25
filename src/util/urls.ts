@@ -27,6 +27,7 @@ export const BOOK_DELETE = BOOK_PREFIX + "/delete_book/";
 const AUTHOR_PREFIX = PREFIX + "/authors"
 export const AUTHOR_GET_BY_ID_URL = AUTHOR_PREFIX + "/";
 export const AUTHOR_GET_ALL = AUTHOR_PREFIX + "/all_authors";
+export const AUTHOR_GET_ALL_COUNTRIES = AUTHOR_PREFIX + "/all_countries";
 export const AUTHOR_ADD = AUTHOR_PREFIX + "/add_author";
 export const AUTHOR_UPDATE = AUTHOR_PREFIX + "/update_author/";
 export const AUTHOR_DELETE = AUTHOR_PREFIX + "/delete_author/";
@@ -37,6 +38,7 @@ export const INSTANCE_GET_ALL = INSTANCE_PREFIX  + "/all_view_book_instance";
 export const INSTANCE_ADD = INSTANCE_PREFIX  + "/add_bookInstance";
 export const INSTANCE_UPDATE = INSTANCE_PREFIX  + "/update_bookInstance/";
 export const INSTANCE_DELETE = INSTANCE_PREFIX  + "/delete_bookInstance/";
+export const INSTANCE_SUPPLY_GET_ALL = INSTANCE_PREFIX + "/get_supply_books"
 
 export const BOOK_READER_GET = PREFIX + "/book_reader/profile_books/";
 export const BOOK_READER_ADD = PREFIX + "/book_reader/add_bookReader";
@@ -44,6 +46,8 @@ export const BOOK_READER_CREATE = PREFIX + "/book_reader/add_bookReader";
 export const BOOK_READER_GET_ALL = PREFIX + "/book_reader/all_view_book_reader";
 export const BOOK_READER_DELETE = PREFIX + "/book_reader/delete_bookReader/";
 export const BOOK_READER_UPDATE = PREFIX + "/book_reader/update_bookReader/";
+export const BOOK_READER_ORDERS_ALL = PREFIX + "/book_reader/all_orders/";
+
 
 const PUBLISHER_PREFIX = PREFIX + "/publishers";
 export const PUBLISHER_GET_ALL = PUBLISHER_PREFIX  + "/all_publishers";
@@ -75,6 +79,7 @@ export const PENALTY_ADD = PENALTY_PREFIX  + "/add_penalty";
 export const PENALTY_UPDATE = PENALTY_PREFIX  + "/update_penalty/";
 export const PENALTY_DELETE = PENALTY_PREFIX  + "/delete_penalty/";
 export const PENALTY_GET_READERS = PENALTY_PREFIX + "/get_all_readers";
+export const PENALTY_VIEW_GET_ALL = PENALTY_PREFIX + "/all_view_penalty";
 
 const AUTHORS_BOOK_PREFIX = PREFIX + "/authors_book"
 export const AUTHORS_BOOK_GET_ALL = AUTHORS_BOOK_PREFIX + "/all_view_authorsBook"

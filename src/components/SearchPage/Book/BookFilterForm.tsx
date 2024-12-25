@@ -35,7 +35,7 @@ export const BookFilterForm: React.FC<Props> = ({filter, params}) => {
   const applyFilters = () => {
     // Применяем все фильтры при нажатии на кнопку
     console.log(filterForm); // Печать текущего состояния фильтров
-    navigateHandler(filterForm, navigate); // Навигация с актуальными фильтрами
+    navigateHandler({...filterForm, type:"books"}, navigate); // Навигация с актуальными фильтрами
   };
 
   return (

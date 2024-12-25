@@ -52,8 +52,8 @@ export const AuthorListToHtml: React.FC<AuthorProps> = ({ authors }): JSX.Elemen
         alignItems: 'center',
       }}>
         {authors.map((author) => (
-          <div key={author.id_author} onClick={() => handleAuthorClick(author.id_author)} className="author-to-html-item">
-            <div className="author-to-html-header">
+          <div key={author.id_author} className="author-to-html-item">
+            <div className="author-to-html-header" onClick={() => handleAuthorClick(author.id_author)} >
               <h3>{author.name}</h3>
               <button onClick={() => handleNavigateToProfile(author.id_author)} className="profile-button">
                 View Profile
@@ -82,7 +82,7 @@ export const AuthorListToHtml: React.FC<AuthorProps> = ({ authors }): JSX.Elemen
               </div>
         
               {books.filter((book) => book.book_name.toLowerCase().includes(searchTerm)).length === 0 && (
-                <p className="author-to-html-no-results">У автора нет книг.</p>
+                <p className="author-to-html-no-results">У автора нет книг с таким названием.</p>
               )}
             </div>
             ) : (

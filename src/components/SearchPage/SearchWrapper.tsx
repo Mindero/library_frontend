@@ -8,20 +8,17 @@ import { navigateHandler } from "../../util/searchNavigateHandler";
 import { SearchAuthorPage } from "./Author/SearchAuthorPage";
 
 export const SearchWrapper = () => {
-  const [searchType, setSearchType] = useState<'books' | 'authors'>('books');
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const params = Object.fromEntries(queryParams.entries());
-
+  const {type} = params;
   const handleSearchTypeChange = (type: 'books' | 'authors') => {
-    setSearchType(type);
     params['type'] = type;
-    // Навигация по новому пути
     navigateHandler(params, navigate);
   };
 
-  const searching = {
+  const searching: { [key: string]: React.ReactNode }= {
     'books': <SearchBookPage/>,
     'authors': <SearchAuthorPage/>
   }
@@ -30,7 +27,7 @@ export const SearchWrapper = () => {
     <div className="search-wrapper">
       <div className="search-options">
         <button
-          className={`search-option ${searchType === 'books' ? 'active' : ''}`}
+          className={`search-option ${type === 'books' ? 'active' : ''}`}
           onClick={() => { 
             handleSearchTypeChange('books')
           }}
@@ -38,7 +35,7 @@ export const SearchWrapper = () => {
           Товары
         </button>
         <button
-          className={`search-option ${searchType === 'authors' ? 'active' : ''}`}
+          className={`search-option ${type === 'authors' ? 'active' : ''}`}
           onClick={() =>{ 
             handleSearchTypeChange('authors')
           }}
@@ -47,7 +44,7 @@ export const SearchWrapper = () => {
         </button>
       </div>
       <div className="search-content">
-        {searching[searchType]}
+        {searching[type]}
       </div>
     </div>
   );

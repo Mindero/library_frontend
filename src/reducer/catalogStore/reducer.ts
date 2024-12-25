@@ -10,6 +10,9 @@ export const catalogSlice = createSlice({
     setBooksGenres: (state, action: PayloadAction<Genre[]>) => {
       state.bookGenres = action.payload;
     },
+    setAuthorCountries: (state, action: PayloadAction<string[]>) => {
+      state.authorCountries = action.payload;
+    },
     setExpandedAuthor: (state, action: PayloadAction<number | null>) => {
       state.expandedAuthor = action.payload;
     },
@@ -20,5 +23,6 @@ export const catalogSlice = createSlice({
 });
 
 export const catalogBooksGenres = (state: AppState) => state.catalogStore.bookGenres;
+export const catalogAuthorCountries = (state: AppState) => state.catalogStore.authorCountries;
 export const catalogExpandedAuthor = (state: AppState) => state.catalogStore.expandedAuthor;
 export const catalogExpandedAuthorBooks = (state: AppState) => state.catalogStore.expandedAuthorBooks;

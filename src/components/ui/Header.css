@@ -28,6 +28,10 @@
   cursor: pointer;
 }
 
+.catalog-button:hover{
+  background-color: #0056b3;  
+}
+
 .search-bar {
   display: flex;
   justify-content: center;
@@ -79,4 +83,40 @@
 
 .search-button:active {
   background-color: #003f88;
+}
+
+
+.auth-container {
+  display: flex;
+  gap: 10px; /* Расстояние между кнопками */
+  justify-content: flex-end; /* Выравнивание кнопок по правому краю */
+  align-items: center; /* Выравнивание кнопок по вертикали */
+  padding: 10px; /* Внутренний отступ */
+}
+
+.auth-button {
+  padding: 10px 20px; /* Размер кнопки */
+  font-size: 14px; /* Размер текста */
+  border: none; /* Убираем стандартную рамку */
+  border-radius: 5px; /* Скругленные углы */
+  cursor: pointer; /* Курсор при наведении */
+  transition: background-color 0.3s, color 0.3s; /* Плавные переходы */
+}
+
+.login-button {
+  background-color: #007bff; /* Синий цвет для логина */
+  color: #fff; /* Белый текст */
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Темно-синий при наведении */
+}
+
+.register-button {
+  background-color: #28a745; /* Зеленый цвет для регистрации */
+  color: #fff; /* Белый текст */
+}
+
+.register-button:hover {
+  background-color: #218838; /* Темно-зеленый при наведении */
 }

@@ -8,12 +8,14 @@ export interface Genre {
 
 interface CatalogState {
   bookGenres: Genre[],
+  authorCountries: string[],
   expandedAuthor: number | null,
   expandedAuthorBooks: AuthorBook[],
 }
 
 export const initialState: CatalogState = {
   bookGenres: [],
+  authorCountries: [],
   expandedAuthor: null,
   expandedAuthorBooks:[]
 };

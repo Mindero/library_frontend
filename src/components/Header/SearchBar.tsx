@@ -7,7 +7,7 @@ export const SearchBar = () => {
   const [query, setQuery] = useState<string>("");
 
   const navigate = useNavigate();
-
+  
   const onClick = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   }

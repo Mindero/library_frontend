@@ -7,25 +7,26 @@ import '../../ui/SearchWrapper.css'
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
 import { Author, getAllAuthors } from "../../../Authors";
 import { AuthorListToHtml } from "../../../util/authorListToHtml";
+import { AuthorFilterForm } from "./AuthorFilterForm";
 
 export const SearchAuthorPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const params = Object.fromEntries(queryParams.entries());
   const { name, country} = params;
+  params.type = "authors";
   const [authorsList, setAuthorsList] = useState<Author[]>([]);
   // Для передачи фильтров в BookFilterForm
   const filter = {
     country: country,
     name: name,
-    available: false,
   };
   const dispatch = useDispatch();
 
   useEffect(() => {
     const params : any = {};
     if (name) params.name = name;
-    if (country) params.genre = country;
+    if (country) params.country = country;
 
     getAllAuthors(params, dispatch).then((data) => {
       console.log(data);
@@ -37,7 +38,7 @@ export const SearchAuthorPage = () => {
       <div className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          {/* <BookFilterForm filter={filter} params={params}/> */}
+          <AuthorFilterForm filter={filter} params={params}/>
         </div>
         <div className="outter-book-list-container">
           <AuthorListToHtml authors={authorsList}/>

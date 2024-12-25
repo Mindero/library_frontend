@@ -1,0 +1,88 @@
+/* Контейнер для всех заказов */
+.order-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-size: 15px;
+  background-color: #f5f5f5;
+}
+
+/* Индивидуальный заказ */
+.order-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Заголовок заказа */
+.order-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* Блок информации о читателе */
+.order-reader-info {
+  background-color: #f0f8ff;
+  border-left: 4px solid #007bff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.reader-ticket,
+.reader-name,
+.reader-email {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Блок информации о книге */
+.order-book-info {
+  background-color: #fff7e6;
+  border-left: 4px solid #ffa500;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.book-title,
+.book-publisher {
+  margin: 5px 0;
+}
+
+/* Название книги как кнопка */
+.order-book-name-button {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.order-book-name-button:hover {
+  color: #0056b3;
+}
+
+/* Блок с датами */
+.order-dates {
+  background-color: #e6f7e6;
+  border-left: 4px solid #28a745;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.order-dates p {
+  margin: 5px 0;
+  font-size: 14px;
+}

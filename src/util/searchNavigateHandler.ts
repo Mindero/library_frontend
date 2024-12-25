@@ -1,4 +1,4 @@
-export const navigateHandler = (parms:any, navigate: Function) => {
+export const navigateHandler = (parms:any, navigate: Function, prefix: string = "/search?") => {
   const params = new URLSearchParams();
   Object.entries(parms).forEach(([key, value]) => {
     if (value !== undefined) {
@@ -6,5 +6,5 @@ export const navigateHandler = (parms:any, navigate: Function) => {
     }
   });
   // Переход по адресу с query параметрами
-  navigate(`/search?${params.toString()}`);
+  navigate(`${prefix}${params.toString()}`);
 };
