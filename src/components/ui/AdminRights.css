@@ -1,0 +1,60 @@
+/* Контейнер для страницы с правами админа */
+.admin-rights-container {
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Заголовок раздела "Права админа" */
+.admin-rights-header {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Заголовки для разделов (управление отчетами, таблицами и т.д.) */
+.admin-rights-section p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #141313;
+  margin-bottom: 12px;
+  padding-left: 10px;
+}
+
+/* Кнопки, только для этой страницы */
+.admin-rights-container button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Стили для кнопок при наведении */
+.admin-rights-container button:hover {
+  background-color: #c0c0c0;
+  border-color: #aaa;
+  transform: translateY(-2px);
+}
+
+/* Контейнер с кнопками для управления таблицами, выравнивание по горизонтали */
+.admin-rights-container .buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Выравнивание кнопок по левой стороне */
+.admin-rights-container button:focus {
+  outline: none;
+}

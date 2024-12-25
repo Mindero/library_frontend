@@ -6,11 +6,11 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.books-list {
+.profile-books-list {
   margin-top: 20px;
 }
 
-.book-item {
+.profile-book-item {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -19,11 +19,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.book-item p {
+.profile-book-item p {
   margin: 5px 0;
 }
 
-.book-name {
+.profile-book-name {
   color: #000;
   border: none;
   border-radius: 4px;
@@ -33,18 +33,96 @@
 }
 
 
-.penalty-info {
+.profile-penalty-info {
   margin-top: 10px;
   color: #d9534f;
 }
 
-.penalty-alert {
+.profile-penalty-alert {
   font-weight: bold;
   color: #a94442;
 }
 
-.no-books {
+.profile-no-books {
   text-align: center;
   color: #777;
   font-size: 16px;
+}
+
+.tabs {
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tabs button:hover {
+  background-color: #e0e0e0;
+}
+
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.profile-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.profile-search-container {
+  margin-bottom: 20px;
+}
+
+.profile-search-item {
+  margin-bottom: 15px;
+}
+
+.profile-search-input {
+  padding: 8px 12px;
+  width: 30%;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  margin-top: 5px;
+  transition: border-color 0.3s;
+}
+
+.profile-search-input:focus {
+  border-color: #007bff;
+}
+.profile-sort-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-sort-container label {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.profile-sort-container select {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.profile-sort-container select:focus {
+  border-color: #4285f4;
+  outline: none;
 }

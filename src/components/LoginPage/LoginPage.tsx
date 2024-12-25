@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setIsAuth, setJwt, setRole } from '../../reducer/userStore';
 import { postLoginForm } from './LoginService';
 import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function LoginPage() {
@@ -16,6 +17,7 @@ export default function LoginPage() {
 
   const [loginInfo, setloginInfo] = useState<string>();
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +47,7 @@ export default function LoginPage() {
         dispatch(setRole(data.role))
         console.log("Success login");
         setloginInfo("Логин успешен");
+        navigate("/profile");
       } catch(error){
         console.log(error);
       }
