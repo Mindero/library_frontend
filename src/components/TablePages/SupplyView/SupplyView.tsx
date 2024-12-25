@@ -12,6 +12,7 @@ import { SupplyViewFilter } from "./SupplyViewFilter";
 
 export const SupplyView = ({neededRole} :{neededRole: Role[]}) => {
   const jwt : string | null = useSelector(userJwtSelector);
+  const [refreshKey, setRefreshKey] = useState(0); // Для обновления страницы принудительно
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,7 +37,7 @@ export const SupplyView = ({neededRole} :{neededRole: Role[]}) => {
         }
       });
   }, [jwt]);
-
+  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const params = Object.fromEntries(queryParams.entries());
@@ -64,17 +65,17 @@ export const SupplyView = ({neededRole} :{neededRole: Role[]}) => {
       if (data !== undefined) 
         setBooksList(data);
     })
-  }, [start_date, end_date, book_name, author_name]);
+  }, [start_date, end_date, book_name, author_name, refreshKey]);
 
   return (
     <LoadingWrapper dispatch={dispatch}>
-      <div className="search-page">
+      <div key={refreshKey} className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          <SupplyViewFilter filter={filter} params={params}/>
+          <SupplyViewFilter filter={filter} params={params} refreshKey={refreshKey} setRefreshKey={setRefreshKey}/>
         </div>
         <div className="outter-book-list-container">
-          <SupplyListToHtml books={booksList}/>
+          <SupplyListToHtml books={booksList} refreshKey={refreshKey} setRefreshKey={setRefreshKey}/>
         </div>
       </div>
     </LoadingWrapper>

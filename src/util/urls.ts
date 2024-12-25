@@ -39,6 +39,8 @@ export const INSTANCE_ADD = INSTANCE_PREFIX  + "/add_bookInstance";
 export const INSTANCE_UPDATE = INSTANCE_PREFIX  + "/update_bookInstance/";
 export const INSTANCE_DELETE = INSTANCE_PREFIX  + "/delete_bookInstance/";
 export const INSTANCE_SUPPLY_GET_ALL = INSTANCE_PREFIX + "/get_supply_books"
+export const INSTANCE_SUPPLY_DELETE = INSTANCE_PREFIX + "/delete_supply_books"
+export const INSTANCE_SUPPLY_ADD = INSTANCE_PREFIX + "/create_supply_books"
 
 export const BOOK_READER_GET = PREFIX + "/book_reader/profile_books/";
 export const BOOK_READER_ADD = PREFIX + "/book_reader/add_bookReader";

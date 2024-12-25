@@ -11,7 +11,7 @@ export const SearchBookPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const params = Object.fromEntries(queryParams.entries());
-  const { name, genre, year_left, year_right } = params;
+  const { available, name, genre, year_left, year_right } = params;
   const [booksList, setBooksList] = useState<Book[]>([]);
   // Для передачи фильтров в BookFilterForm
   const filter = {
@@ -19,7 +19,7 @@ export const SearchBookPage = () => {
     year_left: year_left,
     year_right: year_right,
     name: name,
-    available: false,
+    available: (available === undefined? false : Boolean(available)),
   };
   const dispatch = useDispatch();
 
@@ -29,12 +29,14 @@ export const SearchBookPage = () => {
     if (genre) params.genre = genre;
     if (year_left) params.year_left = year_left;
     if (year_right) params.year_right = year_right;
+    if (available) params.available = available;
+    else params.available = false;
 
     getBooksBy(params, dispatch).then((data) => {
       if (data !== undefined)
         setBooksList(data);
     })
-  }, [name, genre, year_left, year_right]);
+  }, [available, name, genre, year_left, year_right]);
   return (
     <LoadingWrapper dispatch={dispatch}>
       <div className="search-page">

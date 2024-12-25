@@ -17,9 +17,11 @@ export interface OrderFilterFormInterface {
 interface Props {
   filter: OrderFilterFormInterface,
   params: Params<string>,
+  refreshKey:number;
+  setRefreshKey: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const OrderViewFilter: React.FC<Props> = ({filter, params}) => {
+export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, setRefreshKey}) => {
   const [filterForm, setFilterForm] = useState<OrderFilterFormInterface>(filter);
   const navigate = useNavigate();
   const updateFilterForm = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Сетка с адаптивными колонками */
   gap: 16px; /* Расстояние между элементами */
+  row-gap: 50px;
   padding: 16px;
   width: 100%;
 }
@@ -16,7 +17,7 @@
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   /* Ограничение высоты */
-  height: 200px; /* Задаем фиксированную высоту */
+  height: 100%; /* Задаем фиксированную высоту */
   overflow: hidden; /* Скрываем содержимое, если оно превышает высоту */
   display: flex;
   flex-direction: column;
@@ -49,4 +50,17 @@
 
 .book-name-button:hover {
   text-decoration: underline;
+}
+
+
+/* Иконка удаления (крестик) */
+.delete-icon {
+  font-size: 20px;
+  color: #d9534f;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+  color: #c9302c;
 }
