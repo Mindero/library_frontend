@@ -32,7 +32,7 @@ export const AuthorFilterForm: React.FC<Props> = ({filter, params}) => {
   const applyFilters = () => {
     // console.log(filterForm);
     (filterForm.country === ALL_COUNTRIES) ? (
-      navigateHandler({type:"author"}, navigate)
+      navigateHandler({type:"authors"}, navigate)
     ): (
       navigateHandler({...filterForm, type:"authors"}, navigate) // Навигация с актуальными фильтрами
     )

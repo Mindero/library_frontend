@@ -50,7 +50,7 @@ export const BookFilterForm: React.FC<Props> = ({filter, params}) => {
         >
           {genres.map((genre : Genre) => {
             return (
-              <option value={genre.url}>
+              <option value={genre.name === "Все жанры" ? "" : genre.name}>
                 {genre.name}
               </option>
             )

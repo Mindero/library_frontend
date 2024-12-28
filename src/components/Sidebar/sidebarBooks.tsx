@@ -24,7 +24,7 @@ export const SidebarBooks = () : JSX.Element => {
           return (
             <li onClick={() =>{ 
               dispatch(setShowCatalogSideBar(false));
-              navigateHandler({type:"books", genre: genre.url}, navigate)}
+              navigateHandler({type:"books", genre: genre.name}, navigate)}
               }>
               {genre.name}
             </li>

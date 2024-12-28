@@ -64,7 +64,6 @@ function App() {
   }, []);
   const isAuth : boolean= useSelector(userAuthSelector);
   const role : string | null = useSelector(userRoleSelector);
-  const sidebar = useSelector(settingsShowCatalogSideBar);
   return (
     <BrowserRouter>
       <div className='App'>

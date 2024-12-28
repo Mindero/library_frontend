@@ -17,11 +17,9 @@ export interface OrderFilterFormInterface {
 interface Props {
   filter: OrderFilterFormInterface,
   params: Params<string>,
-  refreshKey:number;
-  setRefreshKey: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, setRefreshKey}) => {
+export const OrderViewFilter: React.FC<Props> = ({filter, params}) => {
   const [filterForm, setFilterForm] = useState<OrderFilterFormInterface>(filter);
   const navigate = useNavigate();
   const updateFilterForm = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -39,7 +37,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
   return (
     <div className="filter-form">
       <div>
-        <label htmlFor="reader_name">Имя читателя</label>
+        <label htmlFor="reader_name">Имя читателя </label>
         <input
           type="text"
           id="reader_name"
@@ -49,7 +47,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="reader_email">Почта читателя</label>
+        <label htmlFor="reader_email">Почта читателя </label>
         <input
           type="text"
           id="reader_email"
@@ -59,7 +57,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="reader_ticket">Читательский билет</label>
+        <label htmlFor="reader_ticket">Читательский билет </label>
         <input
           type="number"
           id="reader_ticket"
@@ -69,7 +67,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="book_name">Название книги</label>
+        <label htmlFor="book_name">Название книги </label>
         <input
           type="text"
           id="book_name"
@@ -79,7 +77,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="publisher_name">Название издателя</label>
+        <label htmlFor="publisher_name">Название издателя </label>
         <input
           type="text"
           id="publisher_name"
@@ -89,7 +87,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="borrow_date">Дата получения</label>
+        <label htmlFor="borrow_date">Дата получения </label>
         <input
           type="date"
           id="borrow_date"
@@ -99,7 +97,7 @@ export const OrderViewFilter: React.FC<Props> = ({filter, params, refreshKey, se
       </div>
 
       <div>
-        <label htmlFor="end_date">Дата возврата читателем</label>
+        <label htmlFor="end_date">Дата возврата читателем </label>
         <input
           type="date"
           id="end_date"

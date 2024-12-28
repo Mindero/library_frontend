@@ -58,7 +58,8 @@ export const PenaltyView = ({neededRole} :{neededRole: Role[]}) => {
     if (reader_ticket) params.reader_ticket = reader_ticket;
 
     getAllPenalties(params, jwt as string, dispatch).then((data) => {
-      if (data !== undefined) 
+      console.log('allPenalty', data);
+      if (data !== undefined)
         setPenaltyList(data);
     })
   }, [reader_name, reader_email, reader_ticket]);

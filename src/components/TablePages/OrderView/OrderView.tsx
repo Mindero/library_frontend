@@ -6,8 +6,9 @@ import { checkAdmin } from "../Checker";
 import { Role } from "../../../util/roles";
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
 import { getAllOrder, Order } from "./OrderViewService";
-import { OrderListToHtml } from "./OrderListToHtml";
+import { OrderListToHtml, OrderPenalty } from "./OrderListToHtml";
 import { OrderViewFilter } from "./OrderViewFilter";
+import { getAllPenalties, Penalty, PenaltyBook } from "../PenaltyView/PenaltyViewService";
 
 export const OrderView = ({neededRole} :{neededRole: Role[]}) => {
   const jwt : string | null = useSelector(userJwtSelector);
@@ -43,6 +44,8 @@ export const OrderView = ({neededRole} :{neededRole: Role[]}) => {
     book_name, publisher_name, borrow_date, end_date,
    } = params;
   const [ordersList, setOrdersList] = useState<Order[]>([]);
+  const [penaltyList, setPenaltyList] = useState<OrderPenalty[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   // Для передачи фильтров в BookFilterForm
   const filter = {
     reader_name: reader_name, 
@@ -58,6 +61,7 @@ export const OrderView = ({neededRole} :{neededRole: Role[]}) => {
 
   useEffect(() => {
     setOrdersList([]);
+    setPenaltyList([]);
     const params : any = {};
     if (reader_name) params.reader_name = reader_name;
     if (reader_email) params.reader_email = reader_email;
@@ -68,21 +72,56 @@ export const OrderView = ({neededRole} :{neededRole: Role[]}) => {
     if (end_date) params.end_date = end_date;
 
     getAllOrder(params, jwt as string, dispatch).then((data) => {
-      if (data !== undefined) 
+      if (data !== undefined){
+        console.log("order ", data)
         setOrdersList(data);
+        getAllPenalties({
+          reader_name: params.reader_name,
+          reader_email: params.reader_email,
+          reader_ticket: params.reader_ticket,
+        }, jwt as string, dispatch).then((data_penalty) => {
+          if (data_penalty !== undefined && data_penalty.length > 0) {
+              const books : PenaltyBook[] = data_penalty.map((x:Penalty) => x.books[0]);
+              console.log("books ", books)
+              const penalties : OrderPenalty[]  = data.map((order: Order) => {
+                const penaltyBook = books.findIndex(
+                (book : PenaltyBook) => {
+                  return book.id_book_reader === order.id_book_reader
+                }
+                );
+                console.log(penaltyBook);
+                if (penaltyBook !== -1){
+                  return {
+                    start_time: books[penaltyBook].start_time,
+                    payment: books[penaltyBook].payment,
+                  }
+                }
+                else{
+                  return {
+                    start_time: "",
+                    payment: -1,
+                  }
+                }
+              });
+              console.log("penalties ", penalties)
+              setPenaltyList(penalties);
+            }
+            })
+      }
     })
   }, [reader_name, reader_email, reader_ticket,
-      book_name, publisher_name, borrow_date, end_date,]);
+      book_name, publisher_name, borrow_date, end_date, refreshKey]);
 
   return (
     <LoadingWrapper dispatch={dispatch}>
-      <div className="search-page">
+      <div key={refreshKey} className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
           <OrderViewFilter filter={filter} params={params}/>
         </div>
         <div className="outter-book-list-container">
-          <OrderListToHtml orders={ordersList}/>
+          <OrderListToHtml orders={ordersList} penalties={penaltyList} 
+              refreshKey={refreshKey} setRefreshKey={setRefreshKey}/>
         </div>
       </div>
     </LoadingWrapper>
