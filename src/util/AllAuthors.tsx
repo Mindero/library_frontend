@@ -19,7 +19,10 @@ export const AllAuthors = ({ authors }: AllAuthorsProps): JSX.Element => {
       {authors.map((author) => (
         <button
           key={author.id_author}
-          onClick={() => onClick(author.id_author)}
+          onClick={(e: React.MouseEvent) => {
+            e.stopPropagation();
+            onClick(author.id_author)
+          }}
           className="allAuthors_button"
         >
           {author.name}
