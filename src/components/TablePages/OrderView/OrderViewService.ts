@@ -17,10 +17,10 @@ export interface Order{
   end_date: string,
 }
 
-export const getAllOrder = async (params: any, jwt: string, dispatch: AppDispatch) => {
+export const getAllOrder = async (params: any, jwt: string, dispatch: AppDispatch) : Promise<Order[] | void> => {
   try{
     dispatch(startLoading());
-    const res = await axios.get(BOOK_READER_ORDERS_ALL, {
+    const res = await axios.get<Order[]>(BOOK_READER_ORDERS_ALL, {
       params,
       headers: {
         Authorization: `Bearer ${jwt}`,
@@ -45,7 +45,7 @@ interface createPenalty{
   payment: number,
 }
 
-export const add_penalty = async (params: createPenalty, jwt: string, dispatch: AppDispatch) => {
+export const add_penalty = async (params: createPenalty, jwt: string, dispatch: AppDispatch) : Promise<true | void> => {
   try{
     dispatch(startLoading());
     const config = {
@@ -53,9 +53,8 @@ export const add_penalty = async (params: createPenalty, jwt: string, dispatch: 
         "Authorization": "Bearer " + jwt
       }
     };
-    const res = await axios.post(PENALTY_ADD, params, config);
-    const data = res.data;
-    return data;
+    await axios.post(PENALTY_ADD, params, config);
+    return true;
   }
   catch(error){
     dispatch(showModal());
@@ -66,16 +65,15 @@ export const add_penalty = async (params: createPenalty, jwt: string, dispatch: 
   }
 }
 
-export const delete_penalty = async (id_book_reader: number, jwt: string, dispatch: AppDispatch) => {
+export const delete_penalty = async (id_book_reader: number, jwt: string, dispatch: AppDispatch) : Promise<true | void> => {
   try{
     dispatch(startLoading());
-    const res = await axios.delete(`${PENALTY_DELETE}${id_book_reader}`, {
+    await axios.delete(`${PENALTY_DELETE}${id_book_reader}`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });
-    const data = res.data;
-    return data;
+    return true;
   }
   catch(error){
     dispatch(showModal());

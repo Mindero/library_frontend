@@ -12,7 +12,7 @@ export interface Genre extends GenreForm {
   id_genre: number
 }
 
-export const fetchAllGenres = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllGenres = async (jwt : string, dispatch: AppDispatch) : Promise<Genre[] | void> => {
   try{
     dispatch(startLoading());
     const res = await axios.get(`${GENRE_GET_ALL}`);
@@ -27,7 +27,7 @@ export const fetchAllGenres = async (jwt : string, dispatch: AppDispatch) => {
   }
 };
 
-export const addGenre = async (jwt : string, form: GenreForm, dispatch: AppDispatch) => {
+export const addGenre = async (jwt : string, form: GenreForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -35,8 +35,8 @@ export const addGenre = async (jwt : string, form: GenreForm, dispatch: AppDispa
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(GENRE_ADD, form, config);
-    return res.data;
+    await axios.post(GENRE_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -47,7 +47,8 @@ export const addGenre = async (jwt : string, form: GenreForm, dispatch: AppDispa
   }
 };
 
-export const updateGenre = async (jwt : string, id_genre: number, form: GenreForm, dispatch : AppDispatch) => {
+export const updateGenre = async (jwt : string, id_genre: number, form: GenreForm, dispatch : AppDispatch
+  ) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -55,8 +56,8 @@ export const updateGenre = async (jwt : string, id_genre: number, form: GenreFor
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${GENRE_UPDATE}${id_genre}`, form, config);
-    return res.data;
+    await axios.put(`${GENRE_UPDATE}${id_genre}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -67,7 +68,7 @@ export const updateGenre = async (jwt : string, id_genre: number, form: GenreFor
   }
 };
 
-export const deleteGenre = async (jwt : string, id_genre: number, dispatch: AppDispatch) => {
+export const deleteGenre = async (jwt : string, id_genre: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

@@ -12,7 +12,7 @@ export interface PenaltyForm{
 export interface Penalty extends PenaltyForm {
 }
 
-export const fetchAllPenalty = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllPenalty = async (jwt : string, dispatch: AppDispatch) : Promise<Penalty[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -32,7 +32,7 @@ export const fetchAllPenalty = async (jwt : string, dispatch: AppDispatch) => {
   }
 };
 
-export const addPenalty = async (jwt : string, form: PenaltyForm, dispatch: AppDispatch) => {
+export const addPenalty = async (jwt : string, form: PenaltyForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -40,8 +40,8 @@ export const addPenalty = async (jwt : string, form: PenaltyForm, dispatch: AppD
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(PENALTY_ADD, form, config);
-    return res.data;
+    await axios.post(PENALTY_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -52,7 +52,8 @@ export const addPenalty = async (jwt : string, form: PenaltyForm, dispatch: AppD
   }
 };
 
-export const updatePenalty = async (jwt : string, id_instance: number, form: PenaltyForm, dispatch : AppDispatch) => {
+export const updatePenalty = async (jwt : string, id_instance: number, form: PenaltyForm, dispatch : AppDispatch
+  ) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -60,8 +61,8 @@ export const updatePenalty = async (jwt : string, id_instance: number, form: Pen
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${PENALTY_UPDATE}${id_instance}`, form, config);
-    return res.data;
+    await axios.put(`${PENALTY_UPDATE}${id_instance}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -72,7 +73,7 @@ export const updatePenalty = async (jwt : string, id_instance: number, form: Pen
   }
 };
 
-export const deletePenalty = async (jwt : string, id_instance: number, dispatch: AppDispatch) => {
+export const deletePenalty = async (jwt : string, id_instance: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

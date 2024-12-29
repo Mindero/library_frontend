@@ -13,7 +13,7 @@ export interface Publisher extends PublisherForm {
   id_publisher: number
 }
 
-export const fetchAllPublishers = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllPublishers = async (jwt : string, dispatch: AppDispatch) : Promise<Publisher[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -33,7 +33,7 @@ export const fetchAllPublishers = async (jwt : string, dispatch: AppDispatch) =>
   }
 };
 
-export const addPublisher = async (jwt : string, form: PublisherForm, dispatch: AppDispatch) => {
+export const addPublisher = async (jwt : string, form: PublisherForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -41,8 +41,8 @@ export const addPublisher = async (jwt : string, form: PublisherForm, dispatch: 
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(PUBLISHER_ADD, form, config);
-    return res.data;
+    await axios.post(PUBLISHER_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -53,7 +53,8 @@ export const addPublisher = async (jwt : string, form: PublisherForm, dispatch: 
   }
 };
 
-export const updatePublisher = async (jwt : string, id_publisher: number, form: PublisherForm, dispatch : AppDispatch) => {
+export const updatePublisher = async (jwt : string, id_publisher: number, form: PublisherForm, dispatch : AppDispatch
+  ) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -61,8 +62,8 @@ export const updatePublisher = async (jwt : string, id_publisher: number, form: 
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${PUBLISHER_UPDATE}${id_publisher}`, form, config);
-    return res.data;
+    await axios.put(`${PUBLISHER_UPDATE}${id_publisher}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -73,7 +74,7 @@ export const updatePublisher = async (jwt : string, id_publisher: number, form: 
   }
 };
 
-export const deletePublisher = async (jwt : string, id_publisher: number, dispatch: AppDispatch) => {
+export const deletePublisher = async (jwt : string, id_publisher: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

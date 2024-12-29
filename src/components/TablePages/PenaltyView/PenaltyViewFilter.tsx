@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Params, useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import '../../ui/SearchWrapper.css'
 import { navigateHandler } from "../../../util/searchNavigateHandler";
 
@@ -12,10 +12,9 @@ export interface PenaltyFilterFormInterface {
 
 interface Props {
   filter: PenaltyFilterFormInterface,
-  params: Params<string>,
 }
 
-export const PenaltyViewFilter: React.FC<Props> = ({filter, params}) => {
+export const PenaltyViewFilter: React.FC<Props> = ({filter}) => {
   const [filterForm, setFilterForm] = useState<PenaltyFilterFormInterface>(filter);
   const navigate = useNavigate();
   const updateFilterForm = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Author, getAllAuthorBook } from "../Authors";
-import { Book } from "../Book";
-import { LoadingWrapper } from "../components/LoadingWrapper/settingsLoading";
 import { useDispatch, useSelector } from "react-redux";
 import { catalogExpandedAuthor, catalogExpandedAuthorBooks } from "../reducer/catalogStore/reducer";
 import { setExpandedAuthor, setExpandedAuthorBooks } from "../reducer/catalogStore";

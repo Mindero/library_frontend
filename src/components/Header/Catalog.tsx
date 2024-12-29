@@ -1,4 +1,3 @@
-import { useState } from "react"
 import '../ui/Header.css'
 import { useDispatch } from "react-redux";
 import { setShowCatalogSideBar } from "../../reducer/settingsStore";

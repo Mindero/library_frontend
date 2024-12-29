@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Params, useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import '../../ui/SearchWrapper.css'
 import { navigateHandler } from "../../../util/searchNavigateHandler";
 import { useSelector } from "react-redux";
 import { catalogAuthorCountries, catalogBooksGenres } from "../../../reducer/catalogStore/reducer";
-import { Genre } from "../../../reducer/catalogStore/initState";
 
 // FilterForm.tsx
 export interface AuthorFilterFormInterface {
@@ -13,10 +12,9 @@ export interface AuthorFilterFormInterface {
 
 interface Props {
   filter: AuthorFilterFormInterface,
-  params: Params<string>,
 }
 
-export const AuthorFilterForm: React.FC<Props> = ({filter, params}) => {
+export const AuthorFilterForm: React.FC<Props> = ({filter}) => {
   const ALL_COUNTRIES = "Все страны";
   const [filterForm, setFilterForm] = useState<AuthorFilterFormInterface>(filter);
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ export const AuthorFilterForm: React.FC<Props> = ({filter, params}) => {
   const applyFilters = () => {
     // console.log(filterForm);
     (filterForm.country === ALL_COUNTRIES) ? (
-      navigateHandler({type:"authors"}, navigate)
+      navigateHandler({...filterForm, country: "", type:"authors"}, navigate)
     ): (
       navigateHandler({...filterForm, type:"authors"}, navigate) // Навигация с актуальными фильтрами
     )

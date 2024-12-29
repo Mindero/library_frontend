@@ -14,7 +14,7 @@ export interface Book {
   year: number,
 }
 
-export const fetchAllBooks = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllBooks = async (jwt : string, dispatch: AppDispatch) : Promise<Book[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -22,7 +22,7 @@ export const fetchAllBooks = async (jwt : string, dispatch: AppDispatch) => {
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(`${BOOK_GET_ALL}`, config);
+    const res = await axios.get<Book[]>(`${BOOK_GET_ALL}`, config);
     return res.data;
   }
   catch (error){
@@ -34,7 +34,7 @@ export const fetchAllBooks = async (jwt : string, dispatch: AppDispatch) => {
   }
 };
 
-export const addBook = async (jwt : string, form: BookForm, dispatch: AppDispatch) => {
+export const addBook = async (jwt : string, form: BookForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -42,8 +42,8 @@ export const addBook = async (jwt : string, form: BookForm, dispatch: AppDispatc
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(BOOK_ADD, form, config);
-    return res.data;
+    await axios.post(BOOK_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -54,7 +54,7 @@ export const addBook = async (jwt : string, form: BookForm, dispatch: AppDispatc
   }
 };
 
-export const updateBook = async (jwt : string, id_boook: number, form: BookForm, dispatch : AppDispatch) => {
+export const updateBook = async (jwt : string, id_boook: number, form: BookForm, dispatch : AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -62,8 +62,8 @@ export const updateBook = async (jwt : string, id_boook: number, form: BookForm,
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${BOOK_UPDATE}${id_boook}`, form, config);
-    return res.data;
+    await axios.put(`${BOOK_UPDATE}${id_boook}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -74,7 +74,7 @@ export const updateBook = async (jwt : string, id_boook: number, form: BookForm,
   }
 };
 
-export const deleteBook = async (jwt : string, id_book: number, dispatch: AppDispatch) => {
+export const deleteBook = async (jwt : string, id_book: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

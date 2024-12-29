@@ -1,0 +1,109 @@
+/* Стиль контейнера */
+.bookInstance_container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Стиль для текста, если экземпляров нет */
+.bookInstance_noInstances {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Заголовок списка экземпляров */
+.bookInstance_instancesHeader {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Карточка экземпляра */
+.bookInstance_instanceCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Кнопка заказа экземпляра */
+.bookInstance_orderButton {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bookInstance_orderButton:hover {
+  background-color: #0056b3;
+}
+
+/* Стиль модального окна */
+.bookInstance_modalContent {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+/* Заголовок модального окна */
+.bookInstance_modalHeader {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Контейнер для ввода дат */
+.bookInstance_dateInputContainer {
+  margin-bottom: 10px;
+}
+
+/* Метка для ввода даты */
+.bookInstance_dateLabel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Поле ввода даты */
+.bookInstance_dateInput {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Контейнер кнопок модального окна */
+.bookInstance_modalButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Кнопка подтверждения заказа */
+.bookInstance_confirmButton {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bookInstance_confirmButton:hover {
+  background-color: #218838;
+}
+
+/* Кнопка отмены */
+.bookInstance_cancelButton {
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bookInstance_cancelButton:hover {
+  background-color: #c82333;
+}

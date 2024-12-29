@@ -1,18 +1,18 @@
-import React, { ChangeEvent } from 'react';
-import { useState } from 'react';
-import LoginForm from './LoginForm';
-import { useDispatch } from 'react-redux';
-import { setIsAuth, setJwt, setRole } from '../../reducer/userStore';
-import { postLoginForm } from './LoginService';
-import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';
-import { useNavigate } from 'react-router-dom';
-
+import React, { ChangeEvent } from "react";
+import { useState } from "react";
+import LoginForm from "./LoginForm";
+import { useDispatch } from "react-redux";
+import { setIsAuth, setJwt, setRole } from "../../reducer/userStore";
+import { LoginResponse, postLoginForm } from "./LoginService";
+import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
+import { useNavigate } from "react-router-dom";
+import "../ui/LoginPage.css";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginForm>({
-    username: '',
-    password: '',
-    role: '',
+    username: "",
+    password: "",
+    role: "",
   });
 
   const [loginInfo, setloginInfo] = useState<string>();
@@ -22,115 +22,76 @@ export default function LoginPage() {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // Обновляем состояние через копирование объекта
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: value, // Обновляем поле по имени
+      [name]: value,
     }));
   };
 
-  const submitLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const submitLogin = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
-    const wrongField : string | null =
-      (form.username.length === 0) ? form.username
-      : (form.password.length === 0) ? form.password
-      : null;
-    console.log(form, wrongField);
-    if (wrongField !== null){
+    const wrongField: string | null =
+      form.username.length === 0
+        ? "почта"
+        : form.password.length === 0
+        ? "пароль"
+        : null;
+
+    if (wrongField !== null) {
       setloginInfo(`Неправильно введено поле ${wrongField}`);
-    }
-    else{
-      try{
-        const data = await postLoginForm(form, dispatch);
+    } else {
+      const data : LoginResponse | void = await postLoginForm(form, dispatch);
+      if (data !== undefined){
         dispatch(setJwt(data.access_token));
         dispatch(setIsAuth(true));
-        dispatch(setRole(data.role))
-        console.log("Success login");
+        dispatch(setRole(data.role));
         setloginInfo("Логин успешен");
         navigate("/profile");
-      } catch(error){
-        console.log(error);
       }
     }
-  }
+  };
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
+    <div className="loginPage_container">
       <LoadingWrapper dispatch={dispatch}>
-        <h2 style={{
-          fontSize: '24px',
-          marginBottom: '20px'
-        }}>
-          Логин
-        </h2>
-        <div style={{
-          marginBottom: '10px',
-          width: '300px',
-          textAlign: 'left'
-        }}>
-          <p style={{ marginBottom: '5px' }}>Почта</p>
+        <h2 className="loginPage_title">Логин</h2>
+        <div className="loginPage_inputGroup">
+          <p className="loginPage_label">Почта</p>
           <input
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '5px',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
+            className="loginPage_input"
             name="username"
             type="text"
-            value={form['username']}
+            value={form["username"]}
             onChange={onChange}
           />
         </div>
-        <div style={{
-          marginBottom: '10px',
-          width: '300px',
-          textAlign: 'left'
-        }}>
-          <p style={{ marginBottom: '5px' }}>Пароль</p>
+        <div className="loginPage_inputGroup">
+          <p className="loginPage_label">Пароль</p>
           <input
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '5px',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
+            className="loginPage_input"
             name="password"
             type="password"
-            value={form['password']}
+            value={form["password"]}
             onChange={onChange}
           />
         </div>
         <button
           type="submit"
           onClick={submitLogin}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007BFF',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            marginTop: '10px'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
+          className="loginPage_button"
         >
           Войти
         </button>
         {loginInfo && (
-          <div style={{
-            marginTop: '10px',
-            color: loginInfo.includes('неправильно') ? 'red' : 'green'
-          }}>
+          <div
+            className={`loginPage_message ${
+              loginInfo.includes("неправильно")
+                ? "loginPage_errorMessage"
+                : "loginPage_successMessage"
+            }`}
+          >
             {loginInfo}
           </div>
         )}

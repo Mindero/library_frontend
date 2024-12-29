@@ -2,20 +2,16 @@ import { setError, showModal, startLoading, stopLoading } from "../../reducer/se
 import { AppDispatch } from "../../store";
 import { READER_REGISTER_URL } from "../../util/urls";
 import RegisterForm from "./RegisterForm";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-export const postRegisterForm = async (registerForm: RegisterForm, dispatch : AppDispatch) => {
-  try{
-    dispatch(startLoading());
-    console.log("URL " + READER_REGISTER_URL);
-    const res = await axios.post(READER_REGISTER_URL, registerForm);
-    return res.data;
-  }
-  catch(error){
-    dispatch(setError(`Register error ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+export const postRegisterForm = async (registerForm: RegisterForm, dispatch : AppDispatch) : Promise<void> => {
+  dispatch(startLoading());
+  return await axios.post<void>(READER_REGISTER_URL, registerForm)
+    .then((res : AxiosResponse<void>) => res.data)
+    .catch(function (error) {
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Ошибка при регистрации.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
 }

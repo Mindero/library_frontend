@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProfileInfo } from './ProfileService';
-import { useDispatch, useSelector } from 'react-redux';
-import { userJwtSelector } from '../../reducer/userStore/reducer';
 import ProfileForm from './ProfileForm';
 import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';
 import { AppDispatch } from '../../store';

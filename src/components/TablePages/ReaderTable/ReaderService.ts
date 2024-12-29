@@ -27,7 +27,7 @@ export interface Reader {
 }
 
 // Получение всех читателей
-export const fetchAllReaders = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllReaders = async (jwt : string, dispatch: AppDispatch) : Promise<Reader[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -35,7 +35,7 @@ export const fetchAllReaders = async (jwt : string, dispatch: AppDispatch) => {
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(`${READER_GET_ALL_URL}`, config);
+    const res = await axios.get<Reader[]>(`${READER_GET_ALL_URL}`, config);
     return res.data;
   }
   catch (error){
@@ -48,7 +48,7 @@ export const fetchAllReaders = async (jwt : string, dispatch: AppDispatch) => {
 };
 
 // Добавление нового читателя
-export const addReader = async (jwt : string, form: ReaderForm, dispatch: AppDispatch) => {
+export const addReader = async (jwt : string, form: ReaderForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -56,8 +56,8 @@ export const addReader = async (jwt : string, form: ReaderForm, dispatch: AppDis
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(READER_ADD, form, config);
-    return res.data;
+    await axios.post(READER_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add reader ${error}`));
@@ -69,7 +69,7 @@ export const addReader = async (jwt : string, form: ReaderForm, dispatch: AppDis
 };
 
 // Обновление читателя
-export const updateReader = async (jwt : string, id_reader: number, form: ReaderForm, dispatch : AppDispatch) => {
+export const updateReader = async (jwt : string, id_reader: number, form: ReaderForm, dispatch : AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -77,8 +77,8 @@ export const updateReader = async (jwt : string, id_reader: number, form: Reader
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${READER_UPDATE}${id_reader}`, form, config);
-    return res.data;
+    await axios.put(`${READER_UPDATE}${id_reader}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update reader ${error}`));
@@ -90,7 +90,7 @@ export const updateReader = async (jwt : string, id_reader: number, form: Reader
 };
 
 // Удаление читателя
-export const deleteReader = async (jwt : string, id_reader: number, dispatch: AppDispatch) => {
+export const deleteReader = async (jwt : string, id_reader: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -98,7 +98,7 @@ export const deleteReader = async (jwt : string, id_reader: number, dispatch: Ap
   };
   try{
     dispatch(startLoading());
-    const res = await axios.delete(`${READER_DELETE}${id_reader}`, config);
+    await axios.delete(`${READER_DELETE}${id_reader}`, config);
     return true;
   }
   catch(error){

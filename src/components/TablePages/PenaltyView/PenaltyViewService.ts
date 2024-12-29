@@ -1,8 +1,7 @@
 import axios from "axios";
-import { Author } from "../../../Authors";
 import { setError, showModal, startLoading, stopLoading } from "../../../reducer/settingsStore";
 import { AppDispatch } from "../../../store";
-import { BOOK_READER_ORDERS_ALL, INSTANCE_SUPPLY_GET_ALL, PENALTY_VIEW_GET_ALL } from "../../../util/urls";
+import { PENALTY_VIEW_GET_ALL } from "../../../util/urls";
 
 export interface PenaltyBook {
   id_book: number,
@@ -23,10 +22,10 @@ export interface Penalty{
   books: PenaltyBook[]
 }
 
-export const getAllPenalties = async (params: any, jwt: string, dispatch: AppDispatch) => {
+export const getAllPenalties = async (params: any, jwt: string, dispatch: AppDispatch) : Promise<Penalty[] | void> => {
   try{
     dispatch(startLoading());
-    const res = await axios.get(PENALTY_VIEW_GET_ALL, {
+    const res = await axios.get<Penalty[]>(PENALTY_VIEW_GET_ALL, {
       params,
       headers: {
         Authorization: `Bearer ${jwt}`,

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAdmin } from "../Checker";
 import { Role } from "../../../util/roles";
-import { read } from "fs";
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
 import { addAuthor, Author, AuthorForm, deleteAuthor, fetchAllAuthors, updateAuthor } from "./AuthorsService";
 

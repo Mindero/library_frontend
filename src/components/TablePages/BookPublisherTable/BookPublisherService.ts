@@ -14,7 +14,7 @@ export interface BookPublisher extends BookPublisherForm {
   id_book_publisher: number
 }
 
-export const fetchAllBookPublisher = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllBookPublisher = async (jwt : string, dispatch: AppDispatch) : Promise<BookPublisher[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -22,7 +22,7 @@ export const fetchAllBookPublisher = async (jwt : string, dispatch: AppDispatch)
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(`${BOOK_PUBLISHER_GET_ALL}`, config);
+    const res = await axios.get<BookPublisher[]>(`${BOOK_PUBLISHER_GET_ALL}`, config);
     return res.data;
   }
   catch (error){
@@ -34,7 +34,7 @@ export const fetchAllBookPublisher = async (jwt : string, dispatch: AppDispatch)
   }
 };
 
-export const addBookPublisher = async (jwt : string, form: BookPublisherForm, dispatch: AppDispatch) => {
+export const addBookPublisher = async (jwt : string, form: BookPublisherForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -42,8 +42,8 @@ export const addBookPublisher = async (jwt : string, form: BookPublisherForm, di
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(BOOK_PUBLISHER_ADD, form, config);
-    return res.data;
+    await axios.post(BOOK_PUBLISHER_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -54,7 +54,8 @@ export const addBookPublisher = async (jwt : string, form: BookPublisherForm, di
   }
 };
 
-export const updateBookPublisher = async (jwt : string, id_instance: number, form: BookPublisherForm, dispatch : AppDispatch) => {
+export const updateBookPublisher = async (jwt : string, id_instance: number, form: BookPublisherForm, dispatch : AppDispatch
+  ) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -62,8 +63,8 @@ export const updateBookPublisher = async (jwt : string, id_instance: number, for
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${BOOK_PUBLISHER_UPDATE}${id_instance}`, form, config);
-    return res.data;
+    await axios.put(`${BOOK_PUBLISHER_UPDATE}${id_instance}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -74,7 +75,7 @@ export const updateBookPublisher = async (jwt : string, id_instance: number, for
   }
 };
 
-export const deleteBookPublisher = async (jwt : string, id_instance: number, dispatch: AppDispatch) => {
+export const deleteBookPublisher = async (jwt : string, id_instance: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

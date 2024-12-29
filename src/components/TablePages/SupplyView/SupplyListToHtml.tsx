@@ -8,7 +8,7 @@ import { userJwtSelector } from "../../../reducer/userStore/reducer";
 
 interface Props {
   books: SupplyBook[];
-  refreshKey:number;
+  refreshKey: number;
   setRefreshKey: React.Dispatch<React.SetStateAction<number>>
 }
 
@@ -24,7 +24,7 @@ export const SupplyListToHtml: React.FC<Props> = ({ books, refreshKey, setRefres
 
   useEffect(() => {
     if (deleted !== undefined && jwt !== null){
-      delete_supply(deleted, jwt, dispatch).then((data)=>{
+      delete_supply(deleted, jwt, dispatch).then(()=>{
         setDeleted(undefined);
         setRefreshKey(refreshKey => refreshKey + 1); // Изменение ключа, чтобы перерендерить компонент
       });

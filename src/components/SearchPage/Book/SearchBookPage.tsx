@@ -1,4 +1,4 @@
-import { Navigate, useLocation, useParams } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import {Book, getBooksBy } from "../../../Book";
 import { useEffect, useState } from "react";
 import { BookListToHtml } from '../../../util/bookListToHtml';
@@ -19,12 +19,12 @@ export const SearchBookPage = () => {
     year_left: year_left,
     year_right: year_right,
     name: name,
-    available: (available === undefined? false : Boolean(available)),
+    available: (available === "true"),
   };
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const params : any = {};
+    const params : any = {};  
     if (name) params.name = name;
     if (genre) params.genre = genre;
     if (year_left) params.year_left = year_left;
@@ -42,7 +42,7 @@ export const SearchBookPage = () => {
       <div className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          <BookFilterForm filter={filter} params={params}/>
+          <BookFilterForm filter={filter}/>
         </div>
         <div className="outter-book-list-container">
           <BookListToHtml booksList={booksList} showAuthors={true} />

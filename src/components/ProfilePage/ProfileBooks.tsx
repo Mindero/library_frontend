@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProfileBooks, getProfilePenalty, Penalty, ProfileBook } from './ProfileService';
 import { AppDispatch } from '../../store';
 import { LoadingWrapper } from '../LoadingWrapper/settingsLoading';

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { VIEW_BOOKS_GET_BY_AUTHOR_ID, AUTHOR_GET_BY_ID_URL, AUTHOR_GET_ALL } from "../../util/urls";
 import { Book } from "../../Book";
 import { AppDispatch } from "../../store";
@@ -9,49 +9,33 @@ export interface AuthorForm{
   author_name: string,
   books: Book[],
 }
-export const getAuthorBooksById = async (id: string | undefined, dispatch : AppDispatch) => {
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(`${VIEW_BOOKS_GET_BY_AUTHOR_ID}${id}`);
-    const data = res.data;
-    return data;
-  }
-  catch (error){
-    dispatch(setError(`Can't get author by id ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
-}
-export const getAuthorById = async (id: string | undefined, dispatch: AppDispatch) => {
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(`${AUTHOR_GET_BY_ID_URL}${id}`);
-    const data = res.data; 
-    return data;
-  }
-  catch(error){
-    dispatch(setError(`Can't get author by id ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+
+interface authorResponse {
+  birthday: string,
+  country: string,
+  id_author: number,
+  name: string
 }
 
-export const getAllAuthorsId = async (dispatch: AppDispatch) => {
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(`${AUTHOR_GET_ALL}`);
-    const data = res.data; 
-    return data;
-  }
-  catch(error){
-    dispatch(setError(`Can't get author by id ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+export const getAuthorBooksById = async (id: string | undefined, dispatch : AppDispatch) : Promise<Book[] | void> => {
+  dispatch(startLoading());
+  return await axios.get<Book[]>(`${VIEW_BOOKS_GET_BY_AUTHOR_ID}${id}`)
+    .then((res: AxiosResponse<Book[]>) => res.data)
+    .catch(function (error){
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Ошибка при получении книг автора.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
+}
+export const getAuthorById = async (id: string | undefined, dispatch: AppDispatch) : Promise<authorResponse | void> => {
+  dispatch(startLoading());
+  return await axios.get<authorResponse>(`${AUTHOR_GET_BY_ID_URL}${id}`)
+    .then((res : AxiosResponse<authorResponse>) => res.data)
+    .catch(function (error) {
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Нет такого автора.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
 }

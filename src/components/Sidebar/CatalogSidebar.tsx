@@ -12,6 +12,7 @@ export const CatalogSidebar = () => {
   const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState<"Книги" | "Авторы">("Книги");
   const [isTransitioning, setIsTransitioning] = useState(false); // Для отслеживания анимации
+  
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node)) {

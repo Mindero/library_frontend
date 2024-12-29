@@ -1,0 +1,61 @@
+/* Общий контейнер для страницы регистрации */
+.registerPage_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Заголовок страницы */
+.registerPage_title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Общий стиль для полей ввода */
+.registerPage_field {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Метка для полей */
+.registerPage_label {
+  margin-bottom: 5px;
+}
+
+/* Стиль для инпутов */
+.registerPage_input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Кнопка регистрации */
+.registerPage_submitButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.registerPage_submitButton:hover {
+  background-color: #0056b3;
+}
+
+/* Сообщение об ошибке */
+.registerPage_message {
+  margin-top: 10px;
+}
+
+.registerPage_error {
+  color: red;
+}
+
+.registerPage_success {
+  color: green;
+}

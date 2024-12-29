@@ -1,8 +1,6 @@
-import { Navigate, useLocation, useParams } from "react-router-dom"
-import {Book, getBooksBy } from "../../../Book";
+import { useLocation} from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { BookFilterForm } from "../Book/BookFilterForm";
 import '../../ui/SearchWrapper.css'
 import { LoadingWrapper } from "../../LoadingWrapper/settingsLoading";
 import { Author, getAllAuthors } from "../../../Authors";
@@ -16,7 +14,6 @@ export const SearchAuthorPage = () => {
   const { name, country} = params;
   params.type = "authors";
   const [authorsList, setAuthorsList] = useState<Author[]>([]);
-  // Для передачи фильтров в BookFilterForm
   const filter = {
     country: country,
     name: name,
@@ -38,7 +35,7 @@ export const SearchAuthorPage = () => {
       <div className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          <AuthorFilterForm filter={filter} params={params}/>
+          <AuthorFilterForm filter={filter}/>
         </div>
         <div className="outter-book-list-container">
           <AuthorListToHtml authors={authorsList}/>

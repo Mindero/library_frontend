@@ -16,7 +16,7 @@ export interface Author {
   birthday: string,
 }
 
-export const fetchAllAuthors = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllAuthors = async (jwt : string, dispatch: AppDispatch) : Promise<Author[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -24,7 +24,7 @@ export const fetchAllAuthors = async (jwt : string, dispatch: AppDispatch) => {
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(`${AUTHOR_GET_ALL}`, config);
+    const res = await axios.get<Author[]>(`${AUTHOR_GET_ALL}`, config);
     return res.data;
   }
   catch (error){
@@ -36,7 +36,7 @@ export const fetchAllAuthors = async (jwt : string, dispatch: AppDispatch) => {
   }
 };
 
-export const addAuthor = async (jwt : string, form: AuthorForm, dispatch: AppDispatch) => {
+export const addAuthor = async (jwt : string, form: AuthorForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -44,8 +44,8 @@ export const addAuthor = async (jwt : string, form: AuthorForm, dispatch: AppDis
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(AUTHOR_ADD, form, config);
-    return res.data;
+    await axios.post(AUTHOR_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -56,7 +56,7 @@ export const addAuthor = async (jwt : string, form: AuthorForm, dispatch: AppDis
   }
 };
 
-export const updateAuthor = async (jwt : string, id_author: number, form: AuthorForm, dispatch : AppDispatch) => {
+export const updateAuthor = async (jwt : string, id_author: number, form: AuthorForm, dispatch : AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -64,8 +64,8 @@ export const updateAuthor = async (jwt : string, id_author: number, form: Author
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${AUTHOR_UPDATE}${id_author}`, form, config);
-    return res.data;
+    await axios.put(`${AUTHOR_UPDATE}${id_author}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -76,7 +76,7 @@ export const updateAuthor = async (jwt : string, id_author: number, form: Author
   }
 };
 
-export const deleteAuthor = async (jwt : string, id_author: number, dispatch: AppDispatch) => {
+export const deleteAuthor = async (jwt : string, id_author: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

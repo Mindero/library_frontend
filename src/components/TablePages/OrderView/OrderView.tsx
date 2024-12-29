@@ -117,7 +117,7 @@ export const OrderView = ({neededRole} :{neededRole: Role[]}) => {
       <div key={refreshKey} className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          <OrderViewFilter filter={filter} params={params}/>
+          <OrderViewFilter filter={filter}/>
         </div>
         <div className="outter-book-list-container">
           <OrderListToHtml orders={ordersList} penalties={penaltyList} 

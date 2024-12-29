@@ -14,7 +14,7 @@ export interface BookGenre extends BookGenreForm {
   id_book_genres: number
 }
 
-export const fetchAllBookGenre = async (jwt : string, dispatch: AppDispatch) => {
+export const fetchAllBookGenre = async (jwt : string, dispatch: AppDispatch) : Promise<BookGenre[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -22,7 +22,7 @@ export const fetchAllBookGenre = async (jwt : string, dispatch: AppDispatch) => 
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(`${BOOK_GENRE_GET_ALL}`, config);
+    const res = await axios.get<BookGenre[]>(`${BOOK_GENRE_GET_ALL}`, config);
     return res.data;
   }
   catch (error){
@@ -34,7 +34,7 @@ export const fetchAllBookGenre = async (jwt : string, dispatch: AppDispatch) => 
   }
 };
 
-export const addBookGenre = async (jwt : string, form: BookGenreForm, dispatch: AppDispatch) => {
+export const addBookGenre = async (jwt : string, form: BookGenreForm, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -42,8 +42,8 @@ export const addBookGenre = async (jwt : string, form: BookGenreForm, dispatch: 
   };
   try{
     dispatch(startLoading());
-    const res = await axios.post(BOOK_GENRE_ADD, form, config);
-    return res.data;
+    await axios.post(BOOK_GENRE_ADD, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when add author ${error}`));
@@ -54,7 +54,8 @@ export const addBookGenre = async (jwt : string, form: BookGenreForm, dispatch: 
   }
 };
 
-export const updateBookGenre = async (jwt : string, id_book_genre: number, form: BookGenreForm, dispatch : AppDispatch) => {
+export const updateBookGenre = async (jwt : string, id_book_genre: number, form: BookGenreForm, dispatch : AppDispatch
+  ) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -62,8 +63,8 @@ export const updateBookGenre = async (jwt : string, id_book_genre: number, form:
   };
   try{
     dispatch(startLoading());
-    const res = await axios.put(`${BOOK_GENRE_UPDATE}${id_book_genre}`, form, config);
-    return res.data;
+    await axios.put(`${BOOK_GENRE_UPDATE}${id_book_genre}`, form, config);
+    return true;
   }
   catch(error){
     dispatch(setError(`Error when update author ${error}`));
@@ -74,7 +75,7 @@ export const updateBookGenre = async (jwt : string, id_book_genre: number, form:
   }
 };
 
-export const deleteBookGenre = async (jwt : string, id_book_genre: number, dispatch: AppDispatch) => {
+export const deleteBookGenre = async (jwt : string, id_book_genre: number, dispatch: AppDispatch) : Promise<true | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt

@@ -1,4 +1,4 @@
-import { Navigate, useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { AuthorForm, getAuthorBooksById, getAuthorById } from "./AuthorForm";
 import { BookListToHtml } from "../../util/bookListToHtml";
@@ -7,7 +7,9 @@ import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
 
 export const AuthorInfoPage = () => {
   const {id_author} = useParams();
-  if (id_author === undefined) <Navigate to = "/"/>
+  const navigate = useNavigate();
+  console.log("id ", id_author);
+  if (id_author === undefined) navigate("/");
   const number_id = Number(id_author);
   const [authorForm, setAuthorForm] = useState<AuthorForm>({
     "id_author": number_id,

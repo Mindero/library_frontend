@@ -2,8 +2,13 @@ import axios from "axios"
 import { READER_GET_URL } from "../../util/urls"
 import { AppDispatch } from "../../store";
 import { setError, showModal, startLoading, stopLoading } from "../../reducer/settingsStore";
+import { Role } from "../../util/roles";
 
-export const checkAdmin = async (jwt : string, dispatch : AppDispatch)  => {
+interface Response {
+  role: string
+}
+
+export const checkAdmin = async (jwt : string, dispatch : AppDispatch) : Promise<string | void>  => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
@@ -11,7 +16,7 @@ export const checkAdmin = async (jwt : string, dispatch : AppDispatch)  => {
   };
   try{
     dispatch(startLoading());
-    const res = await axios.get(READER_GET_URL, config);
+    const res = await axios.get<Response>(READER_GET_URL, config);
     return res.data.role;
   }
   catch (error){

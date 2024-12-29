@@ -2,7 +2,6 @@ import { useSelector } from "react-redux"
 import { settingsLoading, settingsShowModal } from "../../reducer/settingsStore/reducer";
 import { AppDispatch } from "../../store";
 import { ModalWrapper } from "../ModalWrapper/ModalWrapper";
-import { startLoading } from "../../reducer/settingsStore";
 
 interface LoadingWrapperPros {
   children: React.ReactNode,
@@ -12,7 +11,6 @@ interface LoadingWrapperPros {
 export const LoadingWrapper : React.FC<LoadingWrapperPros> = ({children, dispatch}) => {
   const loading = useSelector(settingsLoading);
   const showModal = useSelector(settingsShowModal);
-  // console.log(`Loading = ${loading}, showModal = ${showModal}`)
   return (
     <div>
       {loading ? (

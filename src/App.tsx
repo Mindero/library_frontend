@@ -1,13 +1,11 @@
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header/Header'
-import {store} from './store';
 import {Route, Routes, Router, BrowserRouter, Link, Navigate } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage'
 import RegisterPage from './components/RegisterPage/RegsiterPage'
 import LoginPage from './components/LoginPage/LoginPage';
 
-import { userAuthSelector, userJwtSelector, userRoleSelector } from './reducer/userStore/reducer';
-import { SearchBookPage } from './components/SearchPage/Book/SearchBookPage';
+import { userAuthSelector, userRoleSelector } from './reducer/userStore/reducer';
 import { BookInfoPage } from './components/BookInfoPage/BookInfoPage';
 import { AuthorInfoPage } from './components/AuthorInfoPage/AuthorInfoPage';
 import { ProfilePage } from './components/ProfilePage/ProfilePage';
@@ -23,12 +21,7 @@ import { BookPublisherTable } from './components/TablePages/BookPublisherTable/B
 import { BookReaderTable } from './components/TablePages/BookReader/BookReaderTable';
 import { PenaltyTable } from './components/TablePages/PenaltyTable/PenaltyTable';
 import { AuthorsBookTable } from './components/TablePages/AuthorsBookView/AuthorsBookTable';
-import { AllBooks } from './components/HomePage/AllBooks';
-import { AllAuthorsInfo } from './components/HomePage/AllAuthorsInfo';
-import { PenaltyReadersTable } from './components/TablePages/PenaltyReaders/PenaltyReaders';
 import { CatalogSidebar } from './components/Sidebar/CatalogSidebar';
-import { setShowCatalogSideBar } from './reducer/settingsStore';
-import { settingsShowCatalogSideBar } from './reducer/settingsStore/reducer';
 import { getAllBooksGenres } from './Book';
 import { useEffect } from 'react';
 import { setAuthorCountries, setBooksGenres } from './reducer/catalogStore';
@@ -57,7 +50,6 @@ function App() {
     })
 
     getAllAuthorsCountry(dispatch).then((data) => {
-      console.log(`authors = ${data}`);
       if (data !== undefined)
         dispatch(setAuthorCountries(data));
     });

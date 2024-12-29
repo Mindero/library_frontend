@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { AllAuthors } from "../../../util/AllAuthors";
 import { add_penalty, delete_penalty, Order } from './OrderViewService';
 import '../../ui/OrderList.css';
-import { Penalty, PenaltyBook } from "../PenaltyView/PenaltyViewService";
 import { useDispatch, useSelector } from "react-redux";
 import { userJwtSelector } from "../../../reducer/userStore/reducer";
 
@@ -12,9 +10,9 @@ export interface OrderPenalty{
 }
 
 interface Props {
-  orders : Order[];
+  orders: Order[];
   penalties: OrderPenalty[];
-  refreshKey:number;
+  refreshKey: number;
   setRefreshKey: React.Dispatch<React.SetStateAction<number>>
 }
 export const OrderListToHtml:React.FC<Props> = ({orders, penalties, refreshKey, setRefreshKey}) => {

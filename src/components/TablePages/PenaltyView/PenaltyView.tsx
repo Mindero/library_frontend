@@ -69,7 +69,7 @@ export const PenaltyView = ({neededRole} :{neededRole: Role[]}) => {
       <div className="search-page">
         {/* Панель фильтров */}
         <div className="filters">
-          <PenaltyViewFilter filter={filter} params={params}/>
+          <PenaltyViewFilter filter={filter}/>
         </div>
         <div className="outter-book-list-container">
           <PenaltyListToHtml penalties={penaltyList}/>

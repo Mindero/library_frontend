@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { catalogBooksGenres } from "../../../reducer/catalogStore/reducer";
 import { Genre } from "../../../reducer/catalogStore/initState";
 
-// FilterForm.tsx
 export interface BookFilterFormInterface {
   genre: string | undefined,
   year_left: string | undefined,
@@ -17,10 +16,9 @@ export interface BookFilterFormInterface {
 
 interface Props {
   filter: BookFilterFormInterface,
-  params: Params<string>,
 }
 
-export const BookFilterForm: React.FC<Props> = ({filter, params}) => {
+export const BookFilterForm: React.FC<Props> = ({filter}) => {
   const [filterForm, setFilterForm] = useState<BookFilterFormInterface>(filter);
   const navigate = useNavigate();
   const genres : Genre[] = [{id:-1, name:"Все жанры", url:""}, ...useSelector(catalogBooksGenres)];

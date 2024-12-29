@@ -13,10 +13,10 @@ export interface SupplyBook{
   count: number
 }
 
-export const getSupplyBooks = async (params: any, jwt: string, dispatch: AppDispatch) => {
+export const getSupplyBooks = async (params: any, jwt: string, dispatch: AppDispatch) : Promise<SupplyBook[] | void> => {
   try{
     dispatch(startLoading());
-    const res = await axios.get(INSTANCE_SUPPLY_GET_ALL, {
+    const res = await axios.get<SupplyBook[]>(INSTANCE_SUPPLY_GET_ALL, {
       params,
       headers: {
         Authorization: `Bearer ${jwt}`,
@@ -40,18 +40,16 @@ export interface deleteSupply {
   publisher_name: string
 }
 
-export const delete_supply = async (params: deleteSupply, jwt: string, dispatch: AppDispatch) => {
+export const delete_supply = async (params: deleteSupply, jwt: string, dispatch: AppDispatch) : Promise<true | void>=> {
   try{
     dispatch(startLoading());
-    
-    const res = await axios.delete(INSTANCE_SUPPLY_DELETE, {
+    await axios.delete(INSTANCE_SUPPLY_DELETE, {
       params,
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });
-    const data = res.data;
-    return data;
+    return true;
   }
   catch(error){
     dispatch(showModal());
@@ -69,7 +67,7 @@ export interface createSupply{
   count:number
 }
 
-export const add_supply = async (params: createSupply, jwt: string, dispatch: AppDispatch) => {
+export const add_supply = async (params: createSupply, jwt: string, dispatch: AppDispatch) : Promise<true | void> => {
   try{
     dispatch(startLoading());
     const config = {
@@ -77,9 +75,8 @@ export const add_supply = async (params: createSupply, jwt: string, dispatch: Ap
         "Authorization": "Bearer " + jwt
       }
     };
-    const res = await axios.post(INSTANCE_SUPPLY_ADD, params, config);
-    const data = res.data;
-    return data;
+    await axios.post(INSTANCE_SUPPLY_ADD, params, config);
+    return true;
   }
   catch(error){
     dispatch(showModal());

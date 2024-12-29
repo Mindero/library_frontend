@@ -16,7 +16,7 @@ export const SearchBar = () => {
     e.preventDefault(); 
     console.log(query);
     (query !== "") ? 
-    navigateHandler({name:query}, navigate)
+    navigateHandler({name:query, type:"books"}, navigate)
     : console.log("query is empty"); 
   }
 

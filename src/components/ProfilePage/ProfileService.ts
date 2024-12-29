@@ -1,13 +1,10 @@
 import { BOOK_READER_GET, READER_GET_PENALTY, READER_GET_URL } from "../../util/urls";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { userJwtSelector } from "../../reducer/userStore/reducer";
+import axios, { AxiosResponse } from "axios";
 import ProfileForm from "./ProfileForm";
-import { ProfileInfo } from "../Header/ProfileInfo";
 import { AppDispatch } from "../../store";
 import { setError, showModal, startLoading, stopLoading } from "../../reducer/settingsStore";
 
-export interface ProfileBook{
+export interface ProfileBook {
   id_book_reader: number,
   book_name : string,
   id_book: number
@@ -16,50 +13,43 @@ export interface ProfileBook{
   end_date: Date,
 }
 
-export interface Penalty{
+export interface Penalty {
   id_book_reader: number,
   start_time: string,
   payment: number
 }
 
-export const getProfileInfo = async (jwt : string | null, dispatch : AppDispatch) => {
-  // console.log("URL " + READER_GET_URL);
+export const getProfileInfo = async (jwt : string, dispatch : AppDispatch) : Promise<ProfileForm | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
     }
   };
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(READER_GET_URL, config);
-    return toProfileForm(res.data);
-  }
-  catch(error){
-    dispatch(setError(`Error when get profile info ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+  dispatch(startLoading());
+  return await axios.get<ProfileForm>(READER_GET_URL, config)
+    .then((res : AxiosResponse<ProfileForm>) => toProfileForm(res.data))
+    .catch(function (error) {
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Ошибка при получении информации о профиле.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
 }
-export const getProfilePenalty = async (jwt: string | null, dispatch : AppDispatch) => {
+export const getProfilePenalty = async (jwt: string, dispatch : AppDispatch) : Promise<Penalty[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
     }
   };
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(`${READER_GET_PENALTY}`, config);
-    return res.data;
-  }
-  catch(error){
-    dispatch(setError(`Error when get profile info ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+  dispatch(startLoading());
+  return await axios.get<Penalty[]>(`${READER_GET_PENALTY}`, config)
+    .then((res : AxiosResponse<Penalty[]>) => res.data)
+    .catch(function (error) {
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Ошибка при получении задолжностей профиля.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
 }
 
 const toProfileForm = (data : any) : ProfileForm => {
@@ -75,22 +65,19 @@ const toProfileForm = (data : any) : ProfileForm => {
   return res;
 }
 
-export const getProfileBooks = async (jwt : string, dispatch : AppDispatch) => {
+export const getProfileBooks = async (jwt : string, dispatch : AppDispatch) : Promise<ProfileBook[] | void> => {
   const config = {
     headers: {
       "Authorization": "Bearer " + jwt
     }
   };
-  try{
-    dispatch(startLoading());
-    const res = await axios.get(`${BOOK_READER_GET}`, config);
-    return res.data;
-  }
-  catch (error){
-    dispatch(setError(`Error when get profile books ${error}`));
-    dispatch(showModal());
-  }
-  finally{
-    dispatch(stopLoading());
-  }
+  dispatch(startLoading());
+  return await axios.get<ProfileBook[]>(`${BOOK_READER_GET}`, config)
+    .then((res : AxiosResponse<ProfileBook[]>) => res.data)
+    .catch(function (error) {
+      console.log(error);
+      dispatch(setError(`${error.response?.status || 500}. Ошибка при получении взятых книг профиля.`));
+      dispatch(showModal());
+    })
+    .finally(() => dispatch(stopLoading()));
 }

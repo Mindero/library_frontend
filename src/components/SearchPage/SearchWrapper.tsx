@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { SearchBookPage } from "./Book/SearchBookPage";
 import '../ui/SearchWrapper.css'
-import { getNewParamsPath } from "./SearchService";
-import { LoadingWrapper } from "../LoadingWrapper/settingsLoading";
 import { navigateHandler } from "../../util/searchNavigateHandler";
 import { SearchAuthorPage } from "./Author/SearchAuthorPage";
 
